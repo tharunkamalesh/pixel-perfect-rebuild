@@ -5,7 +5,8 @@ import { SectionHeading } from "./Features";
 /** Tabbed showcase with autoplaying media, matching the original interaction. */
 export function Showcase() {
   const [active, setActive] = useState(0);
-  const current = SHOWCASE_ITEMS[active];
+  const current = SHOWCASE_ITEMS[active] ?? SHOWCASE_ITEMS[0];
+
 
   return (
     <section className="section pt-0">
