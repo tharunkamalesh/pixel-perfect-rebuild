@@ -10,18 +10,7 @@ export function Hero() {
         aria-hidden="true"
         className="grain-glow pointer-events-none absolute inset-x-0 top-0 h-[620px] opacity-80"
       />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 -z-0 flex justify-center opacity-[0.18]"
-      >
-        <img
-          src={ASSETS.converging}
-          alt=""
-          width={1200}
-          height={540}
-          className="w-[1200px] max-w-none"
-        />
-      </div>
+
 
       <div className="shell relative">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
