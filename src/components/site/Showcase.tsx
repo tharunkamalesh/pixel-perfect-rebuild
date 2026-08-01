@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { SHOWCASE_ITEMS } from "./content";
 import { SectionHeading } from "./Features";
@@ -11,12 +13,21 @@ export function Showcase() {
   return (
     <section className="section pt-0">
       <div className="shell">
-        <SectionHeading
-          title="Get more done, together, anytime, anywhere"
-          body="This is how we help you stay organized, collaborate with your team."
-        />
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+          <div className="max-w-[32rem]">
+            <h2 className="text-[clamp(2.75rem,5vw,4.25rem)] font-medium leading-[0.98] tracking-[-0.04em] text-white">
+              Get more done, together,
+              <br />
+              anytime, anywhere
+            </h2>
+            <p className="mt-6 max-w-[28rem] text-[1.125rem] leading-[1.6] text-white/70">
+              This is how we help you stay organized,
+              <br />
+              collaborate with your team.
+            </p>
+          </div>
 
-        <div className="card-dark mt-12 grid gap-6 p-4 md:mt-16 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:p-6">
+          <div className="card-dark grid gap-6 p-4 md:mt-0 md:p-6">
           <div role="tablist" aria-label="Product highlights" className="flex flex-col gap-1.5">
             {SHOWCASE_ITEMS.map((item, i) => {
               const isActive = i === active;
@@ -64,6 +75,7 @@ export function Showcase() {
               aria-label={current.title}
               className="h-full min-h-[260px] w-full object-cover"
             />
+          </div>
           </div>
         </div>
       </div>
