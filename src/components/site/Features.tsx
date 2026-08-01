@@ -285,16 +285,22 @@ export function Features() {
           </CardShell>
 
           <CardShell>
-            <div className="flex h-40 items-center justify-center rounded-2xl bg-brand-tint/60">
-              <img
-                src={ASSETS.highlight}
-                alt=""
-                width={781}
-                height={337}
-                loading="lazy"
-                className="h-full w-full rounded-2xl object-cover"
-              />
+            <div className="relative flex h-40 items-center justify-center overflow-hidden rounded-2xl bg-brand-tint/60">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className="absolute rounded-2xl border border-line bg-surface shadow-card transition-transform duration-500 group-hover:-translate-y-1"
+                  style={{
+                    width: 200 - i * 34,
+                    height: 96 - i * 14,
+                    transform: `translateY(${(i - 1) * 16}px) scale(${1 - i * 0.02})`,
+                    zIndex: 3 - i,
+                    opacity: 1 - i * 0.12,
+                  }}
+                />
+              ))}
             </div>
+
             <CardText
               icon={Layers}
               title="Adaptable & scalable"
