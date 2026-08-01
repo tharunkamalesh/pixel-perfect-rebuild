@@ -1,4 +1,15 @@
-import { ASSETS } from "./content";
+const COMPANIES = [
+  "Corebyte",
+  "Studio Polaris",
+  "Everpath",
+  "HorizonWorks",
+  "NimbusWorks",
+  "Horizon Labs",
+  "Brightwave",
+  "Northstar",
+  "SummitFlow",
+  "Stratus",
+];
 
 /** Infinite logo marquee — "Trusted by teams everywhere". */
 export function LogoTicker() {
@@ -7,20 +18,18 @@ export function LogoTicker() {
       <div className="shell">
         <p className="text-center text-[0.875rem] text-subtle">Trusted by teams everywhere</p>
         <div className="marquee-mask relative mt-8 overflow-hidden">
-          <div className="marquee-track flex w-max animate-[marquee_38s_linear_infinite] items-center">
-            {[0, 1].map((copy) => (
-              <img
-                key={copy}
-                src={ASSETS.logoStrip}
-                alt={copy === 0 ? "Logos of companies using Accretion" : ""}
-                aria-hidden={copy === 1}
-                width={1920}
-                height={676}
-                loading="lazy"
-                className="h-12 w-auto max-w-none object-contain opacity-70 md:h-16"
-              />
+          <ul className="marquee-track flex w-max animate-[marquee_38s_linear_infinite] items-center gap-12 pr-12">
+            {[...COMPANIES, ...COMPANIES].map((name, i) => (
+              <li
+                key={`${name}-${i}`}
+                aria-hidden={i >= COMPANIES.length}
+                className="flex items-center gap-2.5 text-[1.375rem] font-medium tracking-[-0.03em] whitespace-nowrap text-foreground/35 transition-colors duration-300 hover:text-foreground/70"
+              >
+                <span className="h-2.5 w-2.5 rotate-45 rounded-[2px] bg-foreground/20" />
+                {name}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
