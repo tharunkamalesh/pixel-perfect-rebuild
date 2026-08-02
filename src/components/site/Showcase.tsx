@@ -11,60 +11,57 @@ export function Showcase() {
 
 
   return (
-    <section className="section pt-0">
-      <div className="shell">
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-          <div className="max-w-[32rem]">
-            <h2 className="text-[clamp(2.75rem,5vw,4.25rem)] font-medium leading-[0.98] tracking-[-0.04em] text-white">
+    <section className="section bg-black">
+      <div className="mx-auto w-full max-w-[1536px] px-6 lg:px-12 xl:px-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16 xl:gap-20">
+          <div className="w-full pl-0">
+            <h2 className="text-[2.5rem] lg:text-[3.25rem] font-semibold leading-[1.05] tracking-[-0.04em] text-white">
               Get more done, together,
               <br />
               anytime, anywhere
             </h2>
-            <p className="mt-6 max-w-[28rem] text-[1.125rem] leading-[1.6] text-white/70">
+            <p className="mt-5 text-[1.125rem] leading-[1.5] text-[#9CA3AF]">
               This is how we help you stay organized,
               <br />
               collaborate with your team.
             </p>
+            <div role="tablist" aria-label="Product highlights" className="mt-28 flex flex-col">
+              {SHOWCASE_ITEMS.map((item, i) => {
+                const isActive = i === active;
+                return (
+                  <div key={item.title} className="flex flex-col">
+                    <div className="relative h-[1px] w-full bg-white/10">
+                      {isActive && (
+                        <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-orange-500 to-yellow-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]" />
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      onClick={() => setActive(i)}
+                      className="group w-full py-6 text-left transition-colors"
+                    >
+                      <span
+                        className={`block text-[1.25rem] font-semibold transition-colors ${isActive ? "text-white" : "text-white/40 group-hover:text-white/60"
+                          }`}
+                      >
+                        {item.title}
+                      </span>
+                      <span
+                        className={`block overflow-hidden text-[1rem] leading-relaxed text-[#9CA3AF] transition-all duration-500 ${isActive ? "mt-3 max-h-40 opacity-100" : "max-h-0 opacity-0"
+                          }`}
+                      >
+                        {item.body}
+                      </span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="card-dark grid gap-6 p-4 md:mt-0 md:p-6">
-          <div role="tablist" aria-label="Product highlights" className="flex flex-col gap-1.5">
-            {SHOWCASE_ITEMS.map((item, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={item.title}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActive(i)}
-                  className={`rounded-2xl border p-5 text-left transition-colors duration-300 ${
-                    isActive
-                      ? "border-white/10 bg-white/[0.06]"
-                      : "border-transparent hover:bg-white/[0.03]"
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                        isActive ? "bg-[var(--brand)]" : "bg-white/25"
-                      }`}
-                    />
-                    <span className="display-3 text-[1.0625rem] text-white">{item.title}</span>
-                  </span>
-                  <span
-                    className={`mt-2 block overflow-hidden text-[0.9375rem] leading-relaxed text-white/55 transition-all duration-500 ${
-                      isActive ? "max-h-32 opacity-100" : "max-h-0 opacity-0 md:max-h-0"
-                    }`}
-                  >
-                    {item.body}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-black/25">
+          <div className="relative flex h-[500px] w-full overflow-hidden rounded-[32px] bg-[#f8f6f1] lg:h-[650px] xl:h-[750px] shadow-2xl">
             <video
               key={current.video}
               src={current.video}
@@ -73,9 +70,8 @@ export function Showcase() {
               loop
               playsInline
               aria-label={current.title}
-              className="h-full min-h-[260px] w-full object-cover"
+              className="h-full w-full object-contain"
             />
-          </div>
           </div>
         </div>
       </div>

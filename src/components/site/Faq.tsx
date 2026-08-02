@@ -9,50 +9,59 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section pt-0">
-      <div className="shell">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Frequently asked questions"
-          body="Get answers to commonly asked questions."
-        />
+    <section id="faq" className="section bg-black py-20 lg:py-32">
+      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12 xl:px-16">
 
-        <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-3">
-          {FAQS.map((faq, i) => {
-            const isOpen = open === i;
-            return (
-              <div key={faq.question} className="card overflow-hidden px-6">
-                <h3>
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-panel-${i}`}
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
-                  >
-                    <span className="text-[1rem] font-medium tracking-[-0.01em]">
-                      {faq.question}
-                    </span>
-                    <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line transition-transform duration-300 ${
-                        isOpen ? "rotate-45 border-transparent bg-brand text-ink-foreground" : ""
-                      }`}
-                    >
-                      <Plus className="h-4 w-4" />
-                    </span>
-                  </button>
-                </h3>
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+
+          {/* Left Column (Headers) */}
+          <div>
+            <h2 className="text-[3rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[3.5rem] xl:whitespace-nowrap">
+              Frequently asked questions
+            </h2>
+            <p className="mt-6 text-[1.125rem] leading-relaxed text-[#9CA3AF]">
+              Get answers to commonly asked questions.
+            </p>
+          </div>
+
+          {/* Right Column (Accordion List) */}
+          <div className="flex flex-col gap-4">
+            {FAQS.map((faq, i) => {
+              const isOpen = open === i;
+              return (
                 <div
-                  id={`faq-panel-${i}`}
-                  role="region"
-                  hidden={!isOpen}
-                  className="pb-5 text-[0.9375rem] leading-relaxed text-body"
+                  key={faq.question}
+                  className="overflow-hidden rounded-[16px] border border-white/5 bg-[#0a0a0a] transition-colors hover:bg-white/[0.03]"
                 >
-                  {faq.answer}
+                  <h3>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${i}`}
+                      onClick={() => setOpen(isOpen ? null : i)}
+                      className="flex w-full items-center justify-between gap-4 p-6 text-left"
+                    >
+                      <span className="text-[1rem] font-medium text-white">
+                        {faq.question}
+                      </span>
+                      <span className="flex shrink-0 items-center justify-center text-white/50 transition-transform duration-300" style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}>
+                        <Plus className="h-5 w-5" />
+                      </span>
+                    </button>
+                  </h3>
+                  <div
+                    id={`faq-panel-${i}`}
+                    role="region"
+                    hidden={!isOpen}
+                    className="px-6 pb-6 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]"
+                  >
+                    {faq.answer}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </section>
