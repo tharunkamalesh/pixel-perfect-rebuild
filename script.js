@@ -1,0 +1,1 @@
+const fs=require('fs'); const html=fs.readFileSync('framer.html','utf8'); const start=html.indexOf('<svg width=\"100%\" height=\"100%\" viewBox=\"867 0 2400 1080\"'); console.log(html.substring(start, start + 3000));

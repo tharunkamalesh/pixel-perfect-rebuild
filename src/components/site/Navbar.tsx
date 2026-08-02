@@ -66,7 +66,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#pricing"
-              className={`hidden rounded-[12px] bg-[#FF5500] text-[0.875rem] font-semibold text-white transition-all duration-200 hover:bg-[#E64D00] md:inline-flex shadow-[0_1px_2px_rgba(255,255,255,0.1)_inset] ${isScrolled ? "px-4 py-2" : "px-5 py-2.5"
+              className={`hidden rounded-[12px] bg-[#FF4F00] text-[0.875rem] font-semibold text-white transition-all duration-200 hover:bg-[#E64D00] md:inline-flex shadow-[0_1px_2px_rgba(255,255,255,0.1)_inset] ${isScrolled ? "px-4 py-2" : "px-5 py-2.5"
                 }`}
             >
               Get started

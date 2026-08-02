@@ -159,7 +159,7 @@ export function DashboardMockup() {
     <div className="card-dark relative mx-auto w-full overflow-hidden rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06]">
 
       {/* Global Top Nav */}
-      <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+      <div className="flex items-center justify-between border-b border-white/[0.06] bg-[#111111] px-4 py-3">
         <div className="flex items-center gap-2 pr-6">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="text-white">
             <path d="M16 2L2 30h28L16 2z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
@@ -187,7 +187,7 @@ export function DashboardMockup() {
 
       <div className="flex overflow-hidden">
         {/* Sidebar */}
-        <aside className="hidden w-[220px] shrink-0 flex-col border-r border-white/[0.06] p-4 md:flex">
+        <aside className="hidden w-[220px] shrink-0 flex-col border-r border-white/[0.06] bg-[#111111] p-4 md:flex">
           <div className="mb-6 flex items-center gap-2.5">
             <img
               src={ASSETS.profile}
