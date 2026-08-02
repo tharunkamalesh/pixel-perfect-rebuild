@@ -32,10 +32,10 @@ export function Hero() {
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </a>
         </div>
+      </div>
 
-        <div className="animate-rise-4 mt-14 md:mt-20">
-          <DashboardMockup />
-        </div>
+      <div className="animate-rise-4 mt-14 md:mt-20 mx-auto w-full max-w-[1600px] px-4 md:px-8 pb-32">
+        <DashboardMockup />
       </div>
     </section>
   );

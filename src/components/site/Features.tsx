@@ -32,13 +32,17 @@ export { SectionHeading };
 
 export function Features() {
   return (
-    <section id="features" className="section bg-black py-20 lg:py-32">
+    <section id="features" className="section dark bg-black text-foreground py-20 lg:py-32">
       <div className="mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20">
 
-        {/* We can hide the Section heading if it is not in the image, but it's usually assumed to exist. 
-            I'll leave it out of the container so the user's specific request is identically matched. */}
-
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 lg:grid lg:grid-cols-4">
+        <div className="mb-16 text-white [&_.lede]:text-white/80">
+          <SectionHeading
+            title="All the essentials for modern productivity"
+            body="Mobile, automation, workflows, and insights - all in sync and ready to go."
+            align="center"
+          />
+        </div>
+        <div className="mx-auto flex w-full flex-col gap-6 lg:grid lg:grid-cols-4">
 
           {/* Card 1: Mobile App (Left) */}
           <div className="lg:col-span-2 relative flex min-h-[500px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 lg:p-10">
@@ -68,11 +72,10 @@ export function Features() {
                 <img
                   src={ASSETS.converging}
                   alt="Performance scale lines"
-                  className="w-full h-full object-cover object-top opacity-90 transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-top opacity-100 transition-transform duration-700 group-hover:scale-105"
                 />
 
-                {/* Overlay gradient to smoothly fade the image out into the dark background of the card */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/50 to-[#0a0a0a]" />
+                {/* Overlay intentionally removed so image shows clearly */}
               </div>
 
               <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">
