@@ -28,7 +28,7 @@ function QuoteCard({ item }: { item: Testimonial }) {
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="section bg-black py-20 lg:py-32">
+    <section id="testimonials" className="section bg-[#0a0a0a] py-20 lg:py-32">
       <div className="mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20">
         <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
           <h2 className="text-[3.5rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[4rem]">

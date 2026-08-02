@@ -9,7 +9,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section bg-black py-20 lg:py-32">
+    <section id="faq" className="section bg-[#0a0a0a] py-20 lg:py-32">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12 xl:px-16">
 
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">

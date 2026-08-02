@@ -87,16 +87,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Huge Faded Logo Strip */}
-      <div className="w-full mt-24 mb-0 flex justify-center pointer-events-none select-none">
-        <img
-          src={ASSETS.logoStrip}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="w-full max-w-[1920px] h-auto object-cover"
-        />
-      </div>
     </footer>
   );
 }

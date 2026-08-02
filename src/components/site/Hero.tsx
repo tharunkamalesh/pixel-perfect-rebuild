@@ -3,11 +3,12 @@ import { DashboardMockup } from "./DashboardMockup";
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-[180px] md:pt-[220px] pb-16 md:pb-24">
+    <section id="home" className="relative overflow-hidden pt-[180px] md:pt-[220px]">
+
       {/* soft warm glow behind the headline */}
       <div
         aria-hidden="true"
-        className="grain-glow pointer-events-none absolute inset-x-0 top-0 h-[620px] opacity-80"
+        className="grain-glow pointer-events-none absolute inset-x-0 top-0 h-[620px] opacity-80 z-[-1]"
       />
 
       <div className="shell relative">
@@ -31,7 +32,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="animate-rise-4 mt-[100px] md:mt-[140px] mx-auto w-full max-w-[1600px] px-4 md:px-8 pb-32">
+      <div className="animate-rise-4 mt-[100px] md:mt-[140px] mx-auto w-full max-w-[1600px] px-4 md:px-8">
         <DashboardMockup />
       </div>
     </section>

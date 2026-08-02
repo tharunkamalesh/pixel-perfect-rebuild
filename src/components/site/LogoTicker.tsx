@@ -54,12 +54,12 @@ const PARTNERS = [
 /** Infinite logo marquee — "Trusted by teams everywhere". */
 export function LogoTicker() {
   return (
-    <section aria-label="Trusted by teams everywhere" className="relative pb-20 md:pb-32 overflow-hidden bg-transparent">
+    <section aria-label="Trusted by teams everywhere" className="relative pt-12 md:pt-16 pb-20 md:pb-32 overflow-hidden bg-transparent">
 
       {/* Explicit fade layers removed in favor of CSS mask-image for agnostic background blending */}
 
       <div className="w-full max-w-[1440px] mx-auto">
-        <p className="text-center text-[0.9375rem] font-medium text-black">Trusted by teams everywhere</p>
+        <p className="text-center text-[0.9375rem] font-semibold text-black">Trusted by teams everywhere</p>
 
         <div
           className="relative mt-8 md:mt-12 flex items-center overflow-hidden w-full"

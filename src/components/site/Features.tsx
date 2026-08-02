@@ -1,4 +1,9 @@
+"use client";
+
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useRef } from "react";
 import { ASSETS } from "./content";
+import { SectionCurve } from "./SectionCurve";
 
 function SectionHeading({
   eyebrow,
@@ -31,9 +36,51 @@ export { SectionHeading };
 
 
 export function Features() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Track scroll progress purely when this specific section is in viewport
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "center center"]
+  });
+
+  // Map scroll progress so the horizon rises gently from 120px up to 0px and expands
+  const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
+
+  const { scrollYProgress: fullScroll } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  const phoneY = useTransform(fullScroll, [0, 1], [350, -280]);
+
   return (
-    <section id="features" className="section dark bg-black text-foreground py-20 lg:py-32">
-      <div className="mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20">
+    <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[120px] md:pt-[160px] lg:pt-[220px] z-0 overflow-visible">
+
+      {/* 
+        Unified Scroll-Driven Background Wrapper
+        Translates Y together so the solid black fill perfectly trails the arch image.
+      */}
+      <motion.div
+        className="pointer-events-none absolute top-[-80px] md:top-[-120px] lg:top-[-160px] left-0 right-0 bottom-[-1000px] -z-20"
+        style={{ y }}
+      >
+        <motion.div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1520px] flex justify-center"
+          style={{ scaleY, transformOrigin: "bottom" }}
+        >
+          <img
+            src="https://framerusercontent.com/images/7JW5hiKTuIExiSp00XQILMZFt8.png?width=1920&height=676"
+            alt="Glowing Horizon"
+            className="w-full h-[320px]"
+          />
+        </motion.div>
+
+        {/* Solid fill explicitly locked directly underneath the bottom edge of the image matching pure base black to erase subpixel line */}
+        <div className="absolute top-[319px] bottom-0 left-0 w-full bg-[#0a0a0a] -z-10"></div>
+      </motion.div>
+
+      <div className="relative z-10 mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20 pt-8 lg:pt-16">
 
         <div className="mb-16 text-white [&_.lede]:text-white/80">
           <SectionHeading
@@ -55,13 +102,16 @@ export function Features() {
               </p>
             </div>
 
-            <div className="absolute -bottom-[20%] left-1/2 w-[90%] sm:w-[75%] lg:w-[85%] max-w-[600px] -translate-x-1/2 overflow-hidden lg:-bottom-[5%]">
+            <motion.div
+              style={{ y: phoneY }}
+              className="absolute -bottom-[20%] left-1/2 w-[90%] sm:w-[75%] lg:w-[85%] max-w-[600px] -translate-x-1/2 overflow-hidden lg:-bottom-[5%]"
+            >
               <img
                 src={ASSETS.mobileApp}
                 alt=""
                 className="w-full h-auto object-cover object-top opacity-95"
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Cards 2 & 3: Middle Column Stacked */}

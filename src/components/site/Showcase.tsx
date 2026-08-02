@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { SHOWCASE_ITEMS } from "./content";
 import { SectionHeading } from "./Features";
 
@@ -9,9 +10,15 @@ export function Showcase() {
   const [active, setActive] = useState(0);
   const current = SHOWCASE_ITEMS[active] ?? SHOWCASE_ITEMS[0];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % SHOWCASE_ITEMS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className="section bg-black">
+    <section className="section relative z-10 bg-[#0a0a0a]">
       <div className="mx-auto w-full max-w-[1536px] px-6 lg:px-12 xl:px-16">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16 xl:gap-20">
           <div className="w-full pl-0">
@@ -32,7 +39,12 @@ export function Showcase() {
                   <div key={item.title} className="flex flex-col">
                     <div className="relative h-[1px] w-full bg-white/10">
                       {isActive && (
-                        <div className="absolute left-0 top-0 h-full w-[15%] bg-gradient-to-r from-orange-500 to-yellow-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]" />
+                        <motion.div
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 6, ease: "linear" }}
+                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-orange-500 to-yellow-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]"
+                        />
                       )}
                     </div>
                     <button

@@ -20,7 +20,7 @@ function ToolTile({ name }: { name: string }) {
 
 export function Integrations() {
   return (
-    <section id="integrations" className="section bg-black pt-32 lg:pt-48 pb-20 text-white">
+    <section id="integrations" className="section bg-[#0a0a0a] pt-32 lg:pt-48 pb-20 text-white">
       <div className="mx-auto w-full max-w-[1600px] lg:max-w-none px-6 lg:px-10 xl:px-16">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <h2 className="display-2 font-semibold text-white">Integrations</h2>
