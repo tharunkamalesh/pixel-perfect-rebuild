@@ -7,6 +7,18 @@ import { LogoMark } from "./LogoMark";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroEl = document.getElementById("home");
+      // Trigger minimization when scrolling near the bottom of the Hero section (where the Trusted ticker begins)
+      const threshold = heroEl ? heroEl.offsetHeight - 150 : 600;
+      setIsScrolled(window.scrollY > threshold);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -16,21 +28,29 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-5">
+    <header className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-5 pointer-events-none">
       <div className="shell">
         <nav
           aria-label="Main"
-          className="flex items-center justify-between gap-6 rounded-[20px] bg-[#111111] px-4 py-3 md:px-[1.125rem] shadow-sm"
+          className={`pointer-events-auto mx-auto flex flex-wrap items-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden rounded-[20px] shadow-sm ${isScrolled
+            ? "max-w-[720px] justify-between md:justify-center gap-6 md:gap-8 bg-neutral-900/60 backdrop-blur-xl px-4 py-2 border border-white/5"
+            : "w-full max-w-[980px] justify-between gap-6 bg-[#111111] px-4 py-3 md:px-[1.125rem]"
+            }`}
         >
           <a
             href="#home"
-            className="flex items-center gap-2.5 text-[1.25rem] font-semibold tracking-tight text-white hover:opacity-90"
+            className="flex shrink-0 items-center gap-2.5 text-[1.25rem] font-semibold tracking-tight text-white hover:opacity-90"
           >
             <LogoMark className="h-[1.35rem] w-[1.35rem]" />
-            <span>Accretion</span>
+            <span
+              className={`transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap overflow-hidden ${isScrolled ? "max-w-0 opacity-0" : "max-w-[120px] opacity-100"
+                }`}
+            >
+              Accretion
+            </span>
           </a>
 
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className={`hidden items-center md:flex transition-all duration-300 ${isScrolled ? "gap-6" : "gap-8"}`}>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
@@ -46,7 +66,8 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <a
               href="#pricing"
-              className="hidden rounded-[12px] bg-[#FF5500] px-5 py-2.5 text-[0.875rem] font-semibold text-white transition-colors duration-200 hover:bg-[#E64D00] md:inline-flex shadow-[0_1px_2px_rgba(255,255,255,0.1)_inset]"
+              className={`hidden rounded-[12px] bg-[#FF5500] text-[0.875rem] font-semibold text-white transition-all duration-200 hover:bg-[#E64D00] md:inline-flex shadow-[0_1px_2px_rgba(255,255,255,0.1)_inset] ${isScrolled ? "px-4 py-2" : "px-5 py-2.5"
+                }`}
             >
               Get started
             </a>
