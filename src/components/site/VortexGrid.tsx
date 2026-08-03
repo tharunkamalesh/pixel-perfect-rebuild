@@ -15,42 +15,41 @@ const perspective = 0.24;
 const max_depth = 145;
 const base_y = -50;
 
-// Palette: light cream → warm beige → soft gold, accent deep gold
-const colorOuter = new THREE.Color("#F5E8CE"); // very light cream (outer)
-const colorMid = new THREE.Color("#DFC080"); // warm beige (mid distance)
-const colorRim = new THREE.Color("#C9A55A"); // rim – slightly darker warm gold
-const colorInside = new THREE.Color("#C8A458"); // inner funnel – soft gold
-const animLineColor = new THREE.Color("#D9A24A"); // accent: deeper gold, only a few lines
+// Exact palette per design spec
+const colorOuter = new THREE.Color("#B99C6A"); // normal grid lines outer
+const colorMid = new THREE.Color("#BFA070"); // mid-distance
+const colorRim = new THREE.Color("#C7A365"); // near funnel – slightly warmer
+const colorInside = new THREE.Color("#C7A365"); // inner funnel – same warm tone
+const animLineColor = new THREE.Color("#D89A3D"); // accent lines – muted gold, never orange
 
 function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number, number, number, number] {
     let alpha = 1.0;
     const color = new THREE.Color();
 
     if (t < 0) {
-        // Inside funnel: become lighter and more transparent quickly → disappear into center glow
-        alpha = Math.max(0, 1.0 - Math.abs(t) * 12.0);
-        color.copy(colorRim).lerp(colorInside, Math.min(1.0, Math.abs(t) * 4.0));
+        // Inner funnel: progressively lighter, dissolves into white center glow
+        alpha = Math.max(0, 1.0 - Math.abs(t) * 10.0);
+        color.copy(colorRim); // warm tone inside
     } else {
-        // Outer mesh: steeper Gaussian so edges dissolve to near-invisible
-        alpha = Math.exp(-3.2 * t * t);
+        // Outer: Gaussian so lines fade near all edges naturally
+        alpha = Math.exp(-3.0 * t * t);
 
-        // Smooth cinema palette progression outward
-        if (t < 0.35) {
-            color.copy(colorRim).lerp(colorMid, t / 0.35);
+        // Lines darken as they approach the funnel (t→0) per spec
+        if (t < 0.3) {
+            // Near funnel: #C7A365 at 22–28%
+            color.copy(colorRim);
         } else {
-            color.copy(colorMid).lerp(colorOuter, Math.min(1.0, (t - 0.35) / 0.65));
+            // Further out: #B99C6A at 12–16%
+            color.copy(colorMid).lerp(colorOuter, Math.min(1.0, (t - 0.3) / 0.7));
         }
     }
 
     if (isThick) {
-        // Near-hole rings: slightly brighter toward rim
-        alpha *= 0.18;
+        alpha *= 0.55; // rim rings — clearly visible like Image 2
     } else if (isRadial) {
-        // Radial/spoke lines: very faint
-        alpha *= 0.10;
+        alpha *= 0.42; // radial spokes — well defined
     } else {
-        // Circular rings outer: ultra-faint, almost invisible at edges
-        alpha *= 0.09;
+        alpha *= 0.35; // circular rings — good contrast
     }
 
     return [color.r, color.g, color.b, alpha];
@@ -120,10 +119,12 @@ function AnimatedRadial({ allowedIndices, delay }: { allowedIndices: number[], d
             if (t_prog < 0) {
                 alpha = Math.max(0, 1.0 - Math.abs(t_prog) * 12.0);
             } else {
-                alpha = Math.exp(-2.2 * t_prog * t_prog);
+                // Slower falloff so they stay alive near edges
+                alpha = Math.exp(-1.5 * t_prog * t_prog);
             }
-            // Accent lines: target 40–50% opacity range
-            colAttr.setXYZW(k, animLineColor.r, animLineColor.g, animLineColor.b, alpha * tailFade * 0.48);
+
+            // Ultra-visible: strongly bump opacity (1.5x) so they cut through darkness and css masks
+            colAttr.setXYZW(k, animLineColor.r, animLineColor.g, animLineColor.b, Math.min(1.0, alpha * tailFade * 1.5));
         }
 
         posAttr.needsUpdate = true;
@@ -139,7 +140,8 @@ function AnimatedRadial({ allowedIndices, delay }: { allowedIndices: number[], d
                 <bufferAttribute attach="attributes-position" args={[initialPos, 3]} count={15} />
                 <bufferAttribute attach="attributes-color" args={[initialCol, 4]} count={15} />
             </bufferGeometry>
-            <lineBasicMaterial vertexColors transparent depthWrite={false} linewidth={2.0} />
+            {/* Make sure depthTest is completely disabled and blending is additive for high visibility */}
+            <lineBasicMaterial vertexColors transparent depthWrite={false} depthTest={false} linewidth={1} blending={THREE.AdditiveBlending} />
         </line>
     );
 }
@@ -326,16 +328,24 @@ export function VortexGrid() {
                 className="absolute left-0 right-0 pointer-events-none"
                 style={{ top: "-100px", bottom: "0px" }}
             >
-                {/* 
-                  Smooth cinematic warm golden bloom and soft radial cream glow 
-                */}
-                {/* Warm background glow: #FFF8E8 center → #FCF3E1 mid → #F8F2E8 outside */}
-                <div
-                    className="absolute inset-0 w-full h-full opacity-100 block"
-                    style={{ background: "radial-gradient(ellipse 90% 70% at 50% 55%, #ffffff 0%, #FFFDF8 8%, #FCF6EB 22%, #F7F0E2 42%, #FCF3E1 62%, #F8F2E8 82%, #F8F2E8 100%)" }}
-                />
 
-                <div className="absolute inset-0 w-full h-full object-cover">
+
+                {/* 4-way edge fade: left, right, top, bottom all dissolve via intersected mask gradients */}
+                <div
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{
+                        maskImage: [
+                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
+                            "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
+                        ].join(", "),
+                        WebkitMaskImage: [
+                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
+                            "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
+                        ].join(", "),
+                        maskComposite: "intersect",
+                        WebkitMaskComposite: "destination-in",
+                    }}
+                >
                     <Canvas
                         dpr={[1, 2]}
                         orthographic

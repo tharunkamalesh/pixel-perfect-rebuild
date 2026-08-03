@@ -87,6 +87,25 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Massive Faded Background Graphic */}
+      <div className="relative mt-24 flex w-full justify-center overflow-hidden pointer-events-none select-none">
+        <div
+          className="flex items-center gap-4 md:gap-8 text-black opacity-[0.05]"
+          style={{ maskImage: "linear-gradient(to bottom, black 0%, transparent 60%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 60%)" }}
+        >
+          {/* Circular Accretion SVG */}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-[20vw] lg:h-[18vw] max-h-[300px] w-auto">
+            <circle cx="12" cy="12" r="6" />
+            <path d="M5.5 19.5L18.5 4.5" strokeLinecap="round" />
+            <path d="M14 18c3-1 4-4 4-7" strokeLinecap="round" opacity="0.8" />
+          </svg>
+
+          <h1 className="text-[22vw] lg:text-[20vw] font-bold tracking-tighter leading-none whitespace-nowrap">
+            Accretion
+          </h1>
+        </div>
+      </div>
+
     </footer>
   );
 }

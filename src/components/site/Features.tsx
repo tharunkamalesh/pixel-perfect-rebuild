@@ -227,6 +227,92 @@ export function Features() {
           </div>
 
         </div>
+
+        {/* 4 Mini Features Row (Staggered animation) */}
+        <motion.div
+          className="mt-16 grid gap-8 md:grid-cols-2 lg:mt-24 lg:grid-cols-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          {/* Item 1 */}
+          <motion.div
+            className="flex flex-col items-start"
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+            }}
+          >
+            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF5500]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 3l-6.5 18a.55.55 0 0 1-1 0L10 14l-7-3.5a.55.55 0 0 1 0-1L21 3z" />
+              </svg>
+            </div>
+            <h4 className="text-[1.125rem] font-semibold text-white">Custom workflows</h4>
+            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Tailored to match your team's unique process with ease.</p>
+          </motion.div>
+
+          {/* Item 2 */}
+          <motion.div
+            className="flex flex-col items-start"
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+            }}
+          >
+            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF5500]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <h4 className="text-[1.125rem] font-semibold text-white">Clear insights</h4>
+            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Intuitive dashboards and analytics to help you track progress and make informed decisions.</p>
+          </motion.div>
+
+          {/* Item 3 */}
+          <motion.div
+            className="flex flex-col items-start"
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+            }}
+          >
+            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF5500]">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="12" r="5" />
+                <circle cx="15" cy="12" r="5" />
+              </svg>
+            </div>
+            <h4 className="text-[1.125rem] font-semibold text-white">Tool integrations</h4>
+            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Seamlessly connects with popular apps (e.g. Slack, Zoom, Mailchimp).</p>
+          </motion.div>
+
+          {/* Item 4 */}
+          <motion.div
+            className="flex flex-col items-start"
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+            }}
+          >
+            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF5500]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" strokeDasharray="4 4" />
+                <rect x="7" y="7" width="10" height="10" rx="1" />
+              </svg>
+            </div>
+            <h4 className="text-[1.125rem] font-semibold text-white">Adaptable & scalable</h4>
+            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Designed for teams of all sizes with customization options to match your workflow.</p>
+          </motion.div>
+
+        </motion.div>
+
       </div>
     </section>
   );
