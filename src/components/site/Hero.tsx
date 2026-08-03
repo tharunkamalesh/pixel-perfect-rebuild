@@ -1,8 +1,8 @@
 "use client";
 
 import { DashboardMockup } from "./DashboardMockup";
-import { HeroBackground } from "./HeroBackground";
 import { motion, Easing } from "framer-motion";
+import { VortexGrid } from "./VortexGrid";
 
 export function Hero() {
   const customEase: Easing = [0.12, 0.23, 0.5, 1];
@@ -11,18 +11,14 @@ export function Hero() {
     hidden: { opacity: 0, scale: 1.2, y: -20 },
     visible: { opacity: 1, scale: 1, y: 0 },
   };
-
   return (
-    <section id="home" className="relative w-full min-h-[700px] bg-[#F8F6F1] flex flex-col items-center justify-center overflow-hidden pt-[120px] md:pt-[150px]">
-
-      {/* Background Animated SVG Wrapper */}
-      <HeroBackground />
+    <section id="home" className="relative w-full min-h-[700px] bg-[#F8F3EA] flex flex-col items-center justify-center overflow-hidden pt-[120px] md:pt-[150px]">
 
       {/* Foreground Staggered Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mt-8 flex flex-col items-center">
 
         <motion.div
-          className="chip bg-white/50 border border-black/10 text-[#0A0A0A]"
+          className="chip bg-white border border-black/10 text-[#0A0A0A]"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -54,7 +50,7 @@ export function Hero() {
 
         <motion.a
           href="#pricing"
-          className="inline-flex mt-8 items-center justify-center bg-[#171717] text-white font-medium text-[15px] px-8 py-[14px] rounded-lg border border-black/10 hover:bg-[#262626] transition-colors shadow-sm"
+          className="relative z-10 inline-flex mt-[50px] md:mt-[60px] items-center justify-center bg-[#171717] text-white font-medium text-[15px] px-8 py-[14px] rounded-lg border border-black/10 hover:bg-[#262626] transition-colors shadow-sm"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -65,7 +61,11 @@ export function Hero() {
 
       </div>
 
-      <div className="mt-[180px] md:mt-[240px] w-full max-w-[1600px] px-4 md:px-8 relative z-10">
+      <div className="w-full flex justify-center pointer-events-none mt-[-50px] relative z-0">
+        <VortexGrid />
+      </div>
+
+      <div className="mt-[20px] md:mt-[40px] w-full max-w-[1600px] px-4 md:px-8 relative z-10">
         <DashboardMockup />
       </div>
     </section>
