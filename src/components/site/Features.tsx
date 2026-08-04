@@ -2,7 +2,9 @@
 
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { ASSETS } from "./content";
+import pic from "../ui/pic.png";
 import { SectionCurve } from "./SectionCurve";
 
 function SectionHeading({
@@ -34,6 +36,78 @@ function SectionHeading({
 export { SectionHeading };
 
 
+
+function ConvergingLinesAnimation() {
+  const paths = [
+    "M 0,20 C 150,20 250,110 400,120",
+    "M 0,60 C 150,60 250,110 400,120",
+    "M 0,110 C 150,110 250,110 400,120",
+    "M 0,170 C 150,170 250,130 400,120",
+    "M 0,230 C 150,230 250,140 400,120",
+  ];
+
+  return (
+    <div className="absolute left-0 top-0 w-full h-[220px] flex items-start justify-center overflow-hidden pointer-events-none">
+      <svg viewBox="0 0 400 240" fill="none" preserveAspectRatio="none" className="w-full h-full opacity-90 mix-blend-screen">
+        <defs>
+          <linearGradient id="baseLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#300000" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.5" />
+          </linearGradient>
+
+          <linearGradient id="glowPulse" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ff0000" stopOpacity="0" />
+            <stop offset="30%" stopColor="#ff4500" stopOpacity="0.8" />
+            <stop offset="70%" stopColor="#ffb000" stopOpacity="1" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+          </linearGradient>
+
+          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        {paths.map((d, i) => (
+          <g key={i}>
+            {/* The base structural line drawn from left to right */}
+            <motion.path
+              d={d}
+              stroke="url(#baseLine)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.5, delay: i * 0.15, ease: "easeOut" }}
+            />
+            {/* The laser light pulse traveling along that exact same structural track */}
+            <motion.path
+              d={d}
+              stroke="url(#glowPulse)"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              filter="url(#softGlow)"
+              initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
+              whileInView={{
+                pathLength: [0, 0.15, 0.15, 0],
+                pathOffset: [0, 0, 0.85, 1],
+                opacity: [0, 1, 1, 0]
+              }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{
+                duration: 1.4,
+                delay: 1.2 + (i * 0.2),
+                ease: "easeInOut",
+                times: [0, 0.1, 0.9, 1]
+              }}
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 export function Features() {
   const containerRef = useRef<HTMLElement>(null);
@@ -119,19 +193,21 @@ export function Features() {
             </div>
           </div>
 
-          {/* Card 2: Performance (Middle Top) */}
+          {/* Card 2: High Accuracy AI (Middle Top) */}
           <div className="lg:col-span-1 lg:row-span-1 relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[200px] group">
-            <div className="absolute left-0 top-0 w-full h-[220px] flex items-start justify-center overflow-hidden">
-              <img
-                src={ASSETS.converging}
-                alt="Performance scale lines"
-                className="w-full h-full object-cover object-top opacity-100 transition-transform duration-700 group-hover:scale-105"
+            <div className="absolute left-0 top-0 w-full h-[220px] flex items-center justify-center overflow-hidden p-4">
+              <Image
+                src={pic}
+                alt="High Accuracy AI"
+                className="w-full h-full object-contain object-top opacity-100 mix-blend-screen transition-transform duration-700 group-hover:scale-105"
               />
+              {/* Aggressive inset vignette seamlessly blends the image's bounding box into the native #0a0a0a background */}
+              <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_0px_20px_20px_#0a0a0a,inset_0px_-40px_30px_0px_#0a0a0a]" />
             </div>
 
             <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">
               <h3 className="text-[1.25rem] font-semibold text-white tracking-tight">
-                Performance that scales with you
+                High Accuracy AI
               </h3>
               <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">
                 Whether you're a 3-person startup or a growing enterprise.
