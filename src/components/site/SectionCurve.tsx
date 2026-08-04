@@ -18,7 +18,7 @@ export function SectionCurve({ flip = false }: SectionCurveProps) {
                 alt="Glow Curve"
                 // Using w-full and h-auto to ensure it scales perfectly across all viewports without breaking aspect ratio,
                 // and optionally adding rotate-180 based on the 'flip' prop.
-                className={`w-full min-w-[800px] h-auto object-cover ${flip ? "rotate-180" : ""
+                className={`w-full h-auto ${flip ? "rotate-180" : ""
                     }`}
             />
         </div>

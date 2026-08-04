@@ -55,29 +55,29 @@ export function Features() {
   const phoneY = useTransform(fullScroll, [0, 1], [40, -40]);
 
   return (
-    <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[280px] sm:pt-[300px] md:pt-[160px] lg:pt-[220px] z-0 overflow-visible">
+    <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[220px] sm:pt-[240px] md:pt-[200px] lg:pt-[240px] z-0 overflow-visible">
 
       {/* 
         Unified Scroll-Driven Background Wrapper
-        Translates Y together so the solid black fill perfectly trails the arch image.
+        Translates Y together so the solid black fill perfectly trails the arch image across all aspect ratios.
       */}
       <motion.div
-        className="pointer-events-none absolute top-[-80px] md:top-[-120px] lg:top-[-160px] left-0 right-0 bottom-[-1000px] -z-20"
+        className="pointer-events-none absolute top-[-120px] md:top-[-160px] lg:top-[-180px] left-0 right-0 bottom-[-1000px] -z-20 flex flex-col"
         style={{ y }}
       >
         <motion.div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1520px] flex justify-center"
+          className="w-full max-w-[1520px] mx-auto flex shrink-0 justify-center"
           style={{ scaleY, transformOrigin: "bottom" }}
         >
           <img
             src="https://framerusercontent.com/images/7JW5hiKTuIExiSp00XQILMZFt8.png?width=1920&height=676"
             alt="Glowing Horizon"
-            className="w-full h-[320px]"
+            className="w-full h-auto"
           />
         </motion.div>
 
-        {/* Solid fill explicitly locked directly underneath the bottom edge of the image matching pure base black to erase subpixel line */}
-        <div className="absolute top-[319px] bottom-0 left-0 w-full bg-[#0a0a0a] -z-10"></div>
+        {/* Solid fill explicitly locked directly underneath the bottom edge of the image seamlessly, regardless of scaled height */}
+        <div className="w-full bg-[#0a0a0a] flex-grow -mt-[1px]"></div>
       </motion.div>
 
       <div className="relative z-20 mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20 pt-0 lg:pt-16">

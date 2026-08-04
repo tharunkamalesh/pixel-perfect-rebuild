@@ -4,11 +4,18 @@ import { useState } from "react";
 import { NAV_LINKS, ASSETS } from "./content";
 import { LogoMark } from "./LogoMark";
 
-const RESOURCES = [
-  { label: "Documentation", href: "#" },
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
-  { label: "Contact", href: "#" },
+const FOOTER_NAV = [
+  { label: "Features", href: "#features" },
+  { label: "Integrations", href: "#" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+];
+
+const FOOTER_SOCIAL = [
+  { label: "Twitter", href: "#" },
+  { label: "LinkedIn", href: "#" },
+  { label: "Instagram", href: "#" },
 ];
 
 export function Footer() {
@@ -16,15 +23,16 @@ export function Footer() {
   const [sent, setSent] = useState(false);
 
   return (
-    <footer className="bg-[#F8F7F2] text-black">
+    <footer className="relative bg-[#F8F7F2] text-black pb-24 sm:pb-0">
       <div className="mx-auto w-full lg:max-w-none px-6 lg:px-12 xl:px-24">
-        <div className="flex flex-col md:flex-row justify-between gap-12 border-t border-black/10 pt-16">
+        <div className="flex flex-col-reverse md:flex-row justify-between border-t border-black/10 pt-8 md:pt-16">
 
-          <div className="flex gap-16 md:gap-32 xl:gap-40">
+          {/* Automatically stacks to BOTTOM on Mobile, sits LEFT on Desktop */}
+          <div className="flex gap-20 md:gap-32 xl:gap-40 border-t border-black/10 pt-8 mt-8 md:border-0 md:pt-0 md:mt-0 w-full md:w-auto relative z-10">
             <nav aria-label="Footer navigation">
               <h2 className="text-[0.75rem] text-[#6B7280] mb-6">Navigation</h2>
               <ul className="flex flex-col gap-4">
-                {NAV_LINKS.map((link) => (
+                {FOOTER_NAV.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
@@ -37,10 +45,10 @@ export function Footer() {
               </ul>
             </nav>
 
-            <nav aria-label="Resources">
-              <h2 className="text-[0.75rem] text-[#6B7280] mb-6">Resources</h2>
+            <nav aria-label="Social">
+              <h2 className="text-[0.75rem] text-[#6B7280] mb-6">Social</h2>
               <ul className="flex flex-col gap-4">
-                {RESOURCES.map((s) => (
+                {FOOTER_SOCIAL.map((s) => (
                   <li key={s.label}>
                     <a
                       href={s.href}
@@ -56,12 +64,13 @@ export function Footer() {
             </nav>
           </div>
 
+          {/* Automatically stacks to TOP on Mobile, sits RIGHT on Desktop */}
           <div className="w-full max-w-[400px]">
             <h2 className="text-[1.125rem] font-medium text-black mb-4">
-              Stay updated
+              What's new, straight to you
             </h2>
             <form
-              className="flex items-center gap-3"
+              className="flex flex-col sm:flex-row gap-3"
               onSubmit={(e) => {
                 e.preventDefault();
                 setSent(true);
@@ -74,14 +83,14 @@ export function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="jane@framer.com"
-                className="w-full flex-1 rounded-[8px] bg-black/5 px-4 py-2.5 text-[0.875rem] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-black/10"
+                className="w-full rounded-[8px] bg-black/[0.04] px-4 py-3 text-[0.875rem] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-black/10"
               />
-              <button type="submit" className="rounded-[8px] bg-[#222] px-6 py-2.5 text-[0.875rem] font-medium text-white transition-colors hover:bg-black">
+              <button type="submit" className="w-full sm:w-auto shrink-0 rounded-[8px] bg-[#222] px-6 py-3 text-[0.875rem] font-medium text-white transition-colors hover:bg-black">
                 {sent ? "Subscribed" : "Subscribe"}
               </button>
             </form>
             <p className="mt-4 text-[0.75rem] text-[#6B7280]">
-              Stay updated with product releases, AI improvements, and enterprise updates.
+              Includes the latest product updates, productivity tips, and insights.
             </p>
           </div>
 
@@ -89,7 +98,7 @@ export function Footer() {
       </div>
 
       {/* Massive Faded Background Graphic */}
-      <div className="relative mt-24 flex w-full justify-center overflow-hidden pointer-events-none select-none">
+      <div className="absolute bottom-0 left-0 right-0 sm:relative sm:mt-16 md:mt-24 flex w-full justify-center overflow-hidden pointer-events-none select-none">
         <div
           className="flex items-center gap-4 md:gap-8 text-black opacity-[0.05]"
           style={{ maskImage: "linear-gradient(to bottom, black 0%, transparent 60%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 60%)" }}

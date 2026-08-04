@@ -4,8 +4,8 @@ import { SectionHeading } from "./Features";
 
 function QuoteCard({ item }: { item: Testimonial }) {
   return (
-    <figure className="flex flex-col justify-between gap-6 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8">
-      <blockquote className="text-[1.0625rem] leading-[1.65] text-[#A1A1A9]">
+    <figure className="flex flex-col justify-between gap-6 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-6 lg:p-8">
+      <blockquote className="text-[0.9375rem] lg:text-[1.0625rem] leading-[1.65] text-[#A1A1A9]">
         {item.quote}
       </blockquote>
       <figcaption className="flex items-center gap-3">
@@ -31,10 +31,10 @@ export function Testimonials() {
     <section id="testimonials" className="section bg-[#0a0a0a] py-20 lg:py-32">
       <div className="mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20">
         <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-          <h2 className="text-[3.5rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[4rem]">
+          <h2 className="text-[2.25rem] sm:text-[2.75rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[4rem]">
             Trusted By Teams Processing Millions Of Documents
           </h2>
-          <p className="mt-6 text-[1.125rem] leading-relaxed text-[#9CA3AF] max-w-4xl">
+          <p className="mt-4 lg:mt-6 text-[1rem] lg:text-[1.125rem] leading-relaxed text-[#9CA3AF] max-w-4xl">
             Hear how our enterprise platform is helping teams eliminate manual data entry entirely.
           </p>
         </div>
@@ -43,12 +43,12 @@ export function Testimonials() {
 
           {/* Column 1 */}
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-5 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 lg:p-10">
+            <div className="flex flex-col gap-5 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-6 lg:p-10">
               <div className="flex items-end justify-between">
-                <p className="text-[3.5rem] font-bold leading-none tracking-tight text-white">
-                  4.9<span className="text-[1.5rem] font-medium text-white/50">/5</span>
+                <p className="text-[3rem] lg:text-[3.5rem] font-bold leading-none tracking-tight text-white">
+                  4.9<span className="text-[1.25rem] lg:text-[1.5rem] font-medium text-white/50">/5</span>
                 </p>
-                <div className="mb-2 flex gap-1 text-[#FF0000]">
+                <div className="mb-2 flex gap-1 text-[#FF6B00]">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-current" />
                   ))}
@@ -88,15 +88,42 @@ export function Testimonials() {
           <div className="flex flex-col gap-6">
             <QuoteCard item={TESTIMONIALS[3]!} />
             <QuoteCard item={TESTIMONIALS[4]!} />
+
+            {/* Stat Row - Mobile Only */}
+            <div className="grid grid-cols-2 gap-3 lg:hidden">
+              <div className="flex min-h-[160px] flex-col justify-between rounded-[20px] bg-gradient-to-br from-[#FF6B00] to-[#CC4400] p-5 text-white shadow-[0_4px_40px_rgba(255,107,0,0.3)]">
+                <div>
+                  <p className="text-[2.25rem] font-bold leading-none tracking-tight">
+                    29<span className="text-[1.25rem] font-medium">%</span>
+                  </p>
+                  <p className="mt-2 text-[0.875rem] font-medium leading-[1.3]">Faster Project<br />Delivery</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-[0.8125rem] font-medium mt-4">
+                  <span className="opacity-80">✦</span> Acme Corp
+                </div>
+              </div>
+              <div className="flex min-h-[160px] flex-col justify-between rounded-[20px] border border-white/5 bg-[#141414] p-5">
+                <div>
+                  <p className="text-[2.25rem] font-bold leading-none tracking-tight text-white">
+                    43<span className="text-[1.25rem] font-medium">%</span>
+                  </p>
+                  <p className="mt-2 text-[0.875rem] font-medium leading-[1.3] text-[#9CA3AF]">Lower Overhead<br />Costs</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-[0.8125rem] font-medium text-[#9CA3AF] mt-4">
+                  <span className="opacity-80">///</span> Luminous
+                </div>
+              </div>
+            </div>
+
             <QuoteCard item={TESTIMONIALS[5]!} />
           </div>
 
-          {/* Column 3 */}
-          <div className="flex flex-col gap-6">
+          {/* Column 3 - Hidden on Mobile */}
+          <div className="hidden lg:flex flex-col gap-6">
             <QuoteCard item={TESTIMONIALS[6]!} />
 
-            <figure className="flex flex-col justify-between gap-6 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8">
-              <blockquote className="text-[1.0625rem] leading-[1.65] text-[#A1A1A9]">
+            <figure className="flex flex-col justify-between gap-6 rounded-[24px] border border-white/5 bg-[#0a0a0a] p-6 lg:p-8">
+              <blockquote className="text-[0.9375rem] lg:text-[1.0625rem] leading-[1.65] text-[#A1A1A9]">
                 Before Veriis, document processing felt like a constant scramble. Now, enterprise AI handles the repetitive stuff, and the extracted data flows straight into our ATS. It's rare to find a document parsing tool that actually delivers on its accuracy promise, but this one really does.
               </blockquote>
               <figcaption className="flex items-center gap-3">
@@ -116,29 +143,29 @@ export function Testimonials() {
             <QuoteCard item={TESTIMONIALS[7]!} />
           </div>
 
-          {/* Column 4 */}
-          <div className="flex flex-col gap-6">
+          {/* Column 4 - Hidden on Mobile */}
+          <div className="hidden lg:flex flex-col gap-6">
             <QuoteCard item={TESTIMONIALS[0]!} />
 
-            {/* Stat Row */}
+            {/* Stat Row - Desktop */}
             <div className="grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-2">
-              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] bg-gradient-to-br from-[#FF0000] to-[#990000] p-5 sm:p-6 text-white shadow-[0_4px_40px_rgba(255,0,0,0.3)]">
+              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] bg-gradient-to-br from-[#FF6B00] to-[#CC4400] p-5 sm:p-6 text-white shadow-[0_4px_40px_rgba(255,107,0,0.3)]">
                 <div>
                   <p className="text-[2.25rem] sm:text-[2.75rem] font-bold leading-none tracking-tight">
-                    80<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">%</span>
+                    29<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">%</span>
                   </p>
-                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4]">Reduction In<br />Manual Entry</p>
+                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4]">Faster Project<br />Delivery</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-[0.8125rem] sm:text-[0.875rem] font-medium">
-                  <span className="opacity-80">✦</span> Enterprise
+                  <span className="opacity-80">✦</span> Acme Corp
                 </div>
               </div>
               <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] border border-white/5 bg-[#141414] p-5 sm:p-6">
                 <div>
                   <p className="text-[2.25rem] sm:text-[2.75rem] font-bold leading-none tracking-tight text-white">
-                    10<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">M+</span>
+                    43<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">%</span>
                   </p>
-                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4] text-[#9CA3AF]">Documents<br />Processed</p>
+                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4] text-[#9CA3AF]">Lower Overhead<br />Costs</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-[0.8125rem] sm:text-[0.875rem] font-medium text-[#9CA3AF]">
                   <span className="opacity-80">///</span> Luminous

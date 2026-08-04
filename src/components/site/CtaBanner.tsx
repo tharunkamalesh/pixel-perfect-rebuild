@@ -15,7 +15,7 @@ export function CtaBanner() {
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
   return (
-    <section ref={containerRef} className="bg-[#F8F7F2] pt-[280px] md:pt-[360px] pb-24 lg:pb-32 relative overflow-visible z-0">
+    <section ref={containerRef} className="bg-[#F8F7F2] pt-[200px] sm:pt-[220px] md:pt-[260px] pb-12 md:pb-24 lg:pb-32 relative overflow-visible z-0">
 
       {/* Inverted dripping horizon */}
       <motion.div className="pointer-events-none absolute top-[-1px] left-0 right-0 z-0 flex justify-center">
@@ -25,25 +25,22 @@ export function CtaBanner() {
         >
           <img
             src="https://framerusercontent.com/images/7JW5hiKTuIExiSp00XQILMZFt8.png?width=1920&height=676"
-            className="w-full h-[320px] rotate-180"
+            className="w-full h-auto rotate-180"
             alt=""
           />
         </motion.div>
       </motion.div>
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center px-6">
-        <h2 className="text-[2.5rem] font-semibold tracking-tight text-black md:text-[3.5rem]">
-          Ready To Automate Document Processing?
+        <h2 className="text-[2.5rem] font-bold tracking-tight text-black md:text-[3.5rem] leading-[1.05]">
+          Pull your team in<br className="max-sm:hidden" /> with Accretion
         </h2>
-        <p className="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-[#71717A] md:text-[1.125rem]">
-          Stop manual data entry and transform documents into structured data with enterprise AI.
+        <p className="mt-5 max-w-2xl text-[1.0625rem] leading-[1.65] text-[#71717A] md:text-[1.125rem]">
+          Your team's next big win starts here. Try Accretion and experience simpler, smarter task management built for growth.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <button className="w-full sm:w-auto rounded-[12px] bg-[#141414] px-8 py-3.5 text-[0.9375rem] font-medium text-white shadow-md transition-all hover:bg-black hover:shadow-lg">
-            Get Started
-          </button>
-          <button className="w-full sm:w-auto rounded-[12px] border border-black/10 bg-white px-8 py-3.5 text-[0.9375rem] font-medium text-black shadow-sm transition-all hover:bg-[#f2f2f2]">
-            Request a Demo
+            Get started
           </button>
         </div>
       </div>
