@@ -52,10 +52,10 @@ export function Features() {
     target: containerRef,
     offset: ["start end", "end start"]
   });
-  const phoneY = useTransform(fullScroll, [0, 1], [350, -280]);
+  const phoneY = useTransform(fullScroll, [0, 1], [40, -40]);
 
   return (
-    <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[120px] md:pt-[160px] lg:pt-[220px] z-0 overflow-visible">
+    <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[280px] sm:pt-[300px] md:pt-[160px] lg:pt-[220px] z-0 overflow-visible">
 
       {/* 
         Unified Scroll-Driven Background Wrapper
@@ -80,7 +80,7 @@ export function Features() {
         <div className="absolute top-[319px] bottom-0 left-0 w-full bg-[#0a0a0a] -z-10"></div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20 pt-8 lg:pt-16">
+      <div className="relative z-20 mx-auto w-full lg:max-w-none px-6 lg:px-10 xl:px-16 2xl:px-20 pt-0 lg:pt-16">
 
         <div className="mb-16 text-white [&_.lede]:text-white/80">
           <SectionHeading
@@ -91,9 +91,9 @@ export function Features() {
         </div>
         <div className="mx-auto flex w-full flex-col gap-6 lg:grid lg:grid-cols-4">
 
-          {/* Card 1: Mobile App (Left) -> Veriis Large Card */}
-          <div className="lg:col-span-2 relative flex min-h-[500px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 lg:p-10">
-            <div className="relative z-10 w-full max-w-lg">
+          {/* Card 1: Mobile App (Left) */}
+          <div className="lg:col-span-2 lg:row-span-2 relative flex min-h-[500px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pb-5 lg:p-10 lg:pb-6">
+            <div className="relative z-10 w-full max-w-lg shrink-0">
               <h3 className="text-[1.5rem] font-semibold tracking-tight text-white md:text-[1.75rem]">
                 Intelligent Document Processing
               </h3>
@@ -102,58 +102,43 @@ export function Features() {
               </p>
             </div>
 
-            <motion.div
-              style={{ y: phoneY }}
-              className="absolute -bottom-[20%] left-1/2 w-[90%] sm:w-[75%] lg:w-[85%] max-w-[600px] -translate-x-1/2 overflow-hidden lg:-bottom-[5%]"
-            >
-              <img
-                src={ASSETS.mobileApp}
-                alt=""
-                className="w-full h-auto object-cover object-top opacity-95"
-              />
-            </motion.div>
-          </div>
-
-          {/* Cards 2 & 3: Middle Column Stacked */}
-          <div className="flex flex-col gap-4">
-
-            <div className="relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[200px] group">
-              <div className="absolute left-0 top-0 w-full h-[220px] flex items-start justify-center overflow-hidden">
+            {/* Normal flow wrapper ensures card cleanly wraps image + 20px padding */}
+            <div className="relative w-full mt-6 md:mt-8 flex justify-center pointer-events-none mt-auto">
+              <motion.div
+                style={{ y: phoneY }}
+                className="w-[180%] sm:w-[150%] md:w-[140%] lg:w-[160%] max-w-[1000px] flex justify-center"
+              >
                 <img
-                  src={ASSETS.converging}
-                  alt="Performance scale lines"
-                  className="w-full h-full object-cover object-top opacity-100 transition-transform duration-700 group-hover:scale-105"
+                  src={ASSETS.mobileApp}
+                  alt="Mobile App Interface"
+                  className="w-full h-auto object-contain opacity-100"
                 />
-              </div>
-
-              <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">
-                <h3 className="text-[1.25rem] font-semibold text-white tracking-tight">
-                  Performance that scales with you
-                </h3>
-                <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">
-                  Whether you're a 3-person startup or a growing enterprise.
-                </p>
-              </div>
+              </motion.div>
             </div>
-
-            <div className="relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[200px]">
-              <div className="absolute left-0 top-0 w-full h-[200px] flex items-center justify-center">
-                <img src={ASSETS.collaboration} alt="" className="h-full w-full object-cover opacity-80" />
-              </div>
-              <div className="relative z-10">
-                <h3 className="text-[1.25rem] font-semibold text-white">
-                  Structured JSON Output
-                </h3>
-                <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">
-                  Receive clean, developer-ready structured data through APIs.
-                </p>
-              </div>
-            </div>
-
           </div>
 
-          {/* Card 4: Smart Automation (Right) */}
-          <div className="relative flex min-h-[500px] flex-col justify-end overflow-hidden rounded-[24px] bg-gradient-to-br from-[#FF0000] to-[#800000] p-8 lg:p-10">
+          {/* Card 2: Performance (Middle Top) */}
+          <div className="lg:col-span-1 lg:row-span-1 relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[200px] group">
+            <div className="absolute left-0 top-0 w-full h-[220px] flex items-start justify-center overflow-hidden">
+              <img
+                src={ASSETS.converging}
+                alt="Performance scale lines"
+                className="w-full h-full object-cover object-top opacity-100 transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+
+            <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">
+              <h3 className="text-[1.25rem] font-semibold text-white tracking-tight">
+                Performance that scales with you
+              </h3>
+              <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">
+                Whether you're a 3-person startup or a growing enterprise.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 4: Smart Automation (Right Box - AI Pipeline) */}
+          <div className="lg:col-span-1 lg:row-span-2 relative flex min-h-[500px] flex-col justify-end overflow-hidden rounded-[24px] bg-gradient-to-br from-[#FF0000] to-[#800000] p-8 lg:p-10">
             {/* Visual Flow diagram */}
             <div className="absolute top-12 left-1/2 flex -translate-x-1/2 flex-col gap-[1.1rem] w-full max-w-[280px]">
               {["Upload Document", "Detect Document Type", "Extract Fields", "Validate Data", "Export Structured JSON"].map((step, i) => (
@@ -224,11 +209,26 @@ export function Features() {
             </div>
           </div>
 
+          {/* Card 3: JSON Output (Middle Bottom) - Appears last on mobile */}
+          <div className="lg:col-span-1 lg:row-span-1 relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[240px]">
+            <div className="absolute left-0 top-0 w-full h-[260px] flex items-center justify-center">
+              <img src={ASSETS.collaboration} alt="" className="h-full w-full object-cover object-top opacity-90" />
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-[1.25rem] font-semibold text-white">
+                Structured JSON Output
+              </h3>
+              <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">
+                Receive clean, developer-ready structured data through APIs.
+              </p>
+            </div>
+          </div>
+
         </div>
 
-        {/* 4 Mini Features Row (Staggered animation) */}
+        {/* 4 Mini Features Row (Staggered animation - 2x2 Mobile, 4x1 Desktop) */}
         <motion.div
-          className="mt-16 grid gap-8 md:grid-cols-2 lg:mt-24 lg:grid-cols-4"
+          className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-8 lg:mt-24 lg:grid-cols-4 lg:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -245,13 +245,16 @@ export function Features() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
             }}
           >
-            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF0000]">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 3l-6.5 18a.55.55 0 0 1-1 0L10 14l-7-3.5a.55.55 0 0 1 0-1L21 3z" />
+            <div
+              className="flex h-[56px] w-[56px] md:h-[64px] md:w-[64px] items-center justify-center rounded-[16px] border border-white/10 mb-6 text-[#FF6B00] shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              style={{ background: 'radial-gradient(circle at center, rgba(255,107,0,0.2) 0%, rgba(26,26,26,1) 65%)' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11" />
               </svg>
             </div>
-            <h4 className="text-[1.125rem] font-semibold text-white">Multiple Document Types</h4>
-            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Supports passports, IDs, licenses, and resumes.</p>
+            <h4 className="text-[1.125rem] font-semibold tracking-tight text-white">Custom workflows</h4>
+            <p className="mt-3 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Tailored to match your team's unique process with ease.</p>
           </motion.div>
 
           {/* Item 2 */}
@@ -262,15 +265,18 @@ export function Features() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
             }}
           >
-            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF0000]">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <div
+              className="flex h-[56px] w-[56px] md:h-[64px] md:w-[64px] items-center justify-center rounded-[16px] border border-white/10 mb-6 text-[#FF6B00] shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              style={{ background: 'radial-gradient(circle at center, rgba(255,107,0,0.2) 0%, rgba(26,26,26,1) 65%)' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
                 <line x1="8" y1="21" x2="16" y2="21" />
                 <line x1="12" y1="17" x2="12" y2="21" />
               </svg>
             </div>
-            <h4 className="text-[1.125rem] font-semibold text-white">Privacy First</h4>
-            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Enterprise-grade security with responsible handling of sensitive information.</p>
+            <h4 className="text-[1.125rem] font-semibold tracking-tight text-white">Clear insights</h4>
+            <p className="mt-3 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Intuitive dashboards and analytics to help you track progress and make informed decisions.</p>
           </motion.div>
 
           {/* Item 3 */}
@@ -281,14 +287,17 @@ export function Features() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
             }}
           >
-            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF0000]">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="9" cy="12" r="5" />
-                <circle cx="15" cy="12" r="5" />
+            <div
+              className="flex h-[56px] w-[56px] md:h-[64px] md:w-[64px] items-center justify-center rounded-[16px] border border-white/10 mb-6 text-[#FF6B00] shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              style={{ background: 'radial-gradient(circle at center, rgba(255,107,0,0.2) 0%, rgba(26,26,26,1) 65%)' }}
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="15" r="5.5" />
+                <circle cx="14" cy="10" r="5.5" />
               </svg>
             </div>
-            <h4 className="text-[1.125rem] font-semibold text-white">API Ready</h4>
-            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Integrates easily into HR, ATS, KYC, and enterprise systems.</p>
+            <h4 className="text-[1.125rem] font-semibold tracking-tight text-white">Tool integrations</h4>
+            <p className="mt-3 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Seamlessly connects with popular apps (e.g. Slack, Zoom, Mailchimp).</p>
           </motion.div>
 
           {/* Item 4 */}
@@ -299,14 +308,16 @@ export function Features() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
             }}
           >
-            <div className="flex h-14 w-14 md:h-[60px] md:w-[60px] items-center justify-center rounded-[16px] bg-[#1a1a1a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_4px_20px_rgba(0,0,0,0.5)] border border-white/5 mb-6 text-[#FF0000]">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" strokeDasharray="4 4" />
-                <rect x="7" y="7" width="10" height="10" rx="1" />
+            <div
+              className="flex h-[56px] w-[56px] md:h-[64px] md:w-[64px] items-center justify-center rounded-[16px] border border-white/10 mb-6 text-[#FF6B00] shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              style={{ background: 'radial-gradient(circle at center, rgba(255,107,0,0.2) 0%, rgba(26,26,26,1) 65%)' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 8V5a2 2 0 0 1 2-2h3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M21 16v3a2 2 0 0 1-2 2h-3" />
               </svg>
             </div>
-            <h4 className="text-[1.125rem] font-semibold text-white">Built For Scale</h4>
-            <p className="mt-2 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Process thousands of documents with consistent performance.</p>
+            <h4 className="text-[1.125rem] font-semibold tracking-tight text-white">Adaptable & scalable</h4>
+            <p className="mt-3 text-[0.9375rem] leading-[1.6] text-[#A1A1A9]">Designed for teams of all sizes with customization options to match your workflow.</p>
           </motion.div>
 
         </motion.div>

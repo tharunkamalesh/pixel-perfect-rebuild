@@ -112,7 +112,7 @@ function TaskCard({ task }: { task: Task }) {
       </div>
 
       {/* Title */}
-      <h4 className="mt-3 text-[0.8125rem] font-medium leading-[1.4] text-white/90">
+      <h4 className="mt-3 text-[0.8125rem] font-medium leading-[1.4] text-white/90 truncate">
         {task.title}
       </h4>
 
@@ -156,7 +156,7 @@ function TaskCard({ task }: { task: Task }) {
 /** Product UI mockup shown in the hero — rebuilt as real markup, not an image. */
 export function DashboardMockup() {
   return (
-    <div className="card-dark relative mx-auto w-full max-w-[420px] md:max-w-none overflow-hidden rounded-[36px] md:rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06]">
+    <div className="card-dark relative mx-auto w-full md:max-w-none overflow-hidden rounded-[28px] md:rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06] max-h-[640px] md:max-h-none">
 
       {/* Fake iOS Status Bar (Visible only on mobile) */}
       <div className="flex md:hidden items-center justify-between px-6 pt-4 pb-2">
@@ -328,10 +328,10 @@ export function DashboardMockup() {
               </div>
             </div>
 
-            {/* Kanban Columns */}
-            <div className="mt-6 flex md:grid flex-nowrap overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-4 md:grid-cols-2 lg:grid-cols-4 pb-4">
+            {/* Kanban Columns — 2-col grid on mobile (side-by-side), 4-col on desktop */}
+            <div className="mt-6 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4 pb-4">
               {COLUMNS.map((col, ci) => (
-                <section key={col.title} className="w-[85vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none">
+                <section key={col.title}>
                   <header className="mb-3.5 flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full" style={{ background: col.tone }} />
                     <h3 className="text-[0.75rem] font-medium text-white/80">{col.title}</h3>

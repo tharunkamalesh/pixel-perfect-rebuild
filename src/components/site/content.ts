@@ -16,7 +16,7 @@ export const ASSETS = {
   logoStrip:
     "https://framerusercontent.com/images/7JW5hiKTuIExiSp00XQILMZFt8.png?width=1920&height=676",
   mobileApp:
-    "https://framerusercontent.com/images/sYgrMK32t75yrfeDiPBHgGkE0.png?width=810&height=550",
+    "https://framerusercontent.com/images/sYgrMK32t75yrfeDiPBHgGkE0.png",
   collaboration:
     "https://framerusercontent.com/images/l72QbdRag1vavpCZqOv1HfBLrr4.png?lossless=1&width=500&height=300",
   converging:

@@ -43,7 +43,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mt-6 font-semibold text-[#0A0A0A] text-[2.75rem] sm:text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.05] tracking-tight w-full max-w-[1100px] mx-auto px-4 sm:px-0"
+          className="mt-6 font-semibold text-[#0A0A0A] text-[2.75rem] sm:text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.05] tracking-tight w-full max-w-[1100px] mx-auto"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -53,7 +53,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-[960px] text-[1.0625rem] md:text-[1.25rem] leading-[1.45] text-[#525252] px-4"
+          className="mt-5 max-w-[960px] text-[1.0625rem] md:text-[1.25rem] leading-[1.45] text-[#525252]"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -88,7 +88,7 @@ export function Hero() {
         <VortexGrid />
       </div>
 
-      <div className="mt-[20px] md:mt-[40px] lg:mt-[50px] xl:mt-[60px] w-full max-w-[1600px] px-4 md:px-8 relative z-10">
+      <div className="mt-[20px] md:mt-[40px] lg:mt-[50px] xl:mt-[60px] w-full max-w-[1600px] px-3 md:px-8 relative z-10">
         <DashboardMockup />
       </div>
     </section>
