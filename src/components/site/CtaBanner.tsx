@@ -32,17 +32,17 @@ export function CtaBanner() {
       </motion.div>
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center px-6">
-        <h2 className="text-[2.5rem] font-semibold tracking-tight text-black md:text-[3.5rem] whitespace-nowrap">
+        <h2 className="text-[2.5rem] font-semibold tracking-tight text-black md:text-[3.5rem]">
           Ready To Automate Document Processing?
         </h2>
         <p className="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-[#71717A] md:text-[1.125rem]">
           Stop manual data entry and transform documents into structured data with enterprise AI.
         </p>
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <button className="rounded-[12px] bg-[#141414] px-8 py-3.5 text-[0.9375rem] font-medium text-white shadow-md transition-all hover:bg-black hover:shadow-lg">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <button className="w-full sm:w-auto rounded-[12px] bg-[#141414] px-8 py-3.5 text-[0.9375rem] font-medium text-white shadow-md transition-all hover:bg-black hover:shadow-lg">
             Get Started
           </button>
-          <button className="rounded-[12px] border border-black/10 bg-white px-8 py-3.5 text-[0.9375rem] font-medium text-black shadow-sm transition-all hover:bg-[#f2f2f2]">
+          <button className="w-full sm:w-auto rounded-[12px] border border-black/10 bg-white px-8 py-3.5 text-[0.9375rem] font-medium text-black shadow-sm transition-all hover:bg-[#f2f2f2]">
             Request a Demo
           </button>
         </div>

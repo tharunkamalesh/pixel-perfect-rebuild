@@ -156,16 +156,41 @@ function TaskCard({ task }: { task: Task }) {
 /** Product UI mockup shown in the hero — rebuilt as real markup, not an image. */
 export function DashboardMockup() {
   return (
-    <div className="card-dark relative mx-auto w-full overflow-hidden rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06]">
+    <div className="card-dark relative mx-auto w-full max-w-[420px] md:max-w-none overflow-hidden rounded-[36px] md:rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06]">
 
-      {/* Global Top Nav */}
-      <div className="flex items-center justify-between border-b border-white/[0.06] bg-[#111111] px-4 py-3">
+      {/* Fake iOS Status Bar (Visible only on mobile) */}
+      <div className="flex md:hidden items-center justify-between px-6 pt-4 pb-2">
+        <span className="text-[0.875rem] font-semibold text-white tracking-tight">9:41</span>
+        <div className="flex items-center gap-1.5 text-white">
+          {/* Signal */}
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor">
+            <rect x="1" y="8" width="3" height="4" rx="1" />
+            <rect x="6" y="5" width="3" height="7" rx="1" />
+            <rect x="11" y="2" width="3" height="10" rx="1" />
+            <rect x="16" y="0" width="3" height="12" rx="1" fillOpacity="0.4" />
+          </svg>
+          {/* Wifi */}
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" className="ml-0.5">
+            <path d="M8 12c-2.3 0-4.4-0.9-6-2.4l1.4-1.4C4.6 9.3 6.2 10 8 10s3.4-0.7 4.6-1.8l1.4 1.4C12.4 11.1 10.3 12 8 12Z" />
+            <path d="M8 8.5C6.5 8.5 5.1 8 4 7.1L5.4 5.7C6.1 6.3 7 6.6 8 6.6s1.9-0.3 2.6-0.9l1.4 1.4C10.9 8 9.5 8.5 8 8.5Z" />
+            <path d="M8 5C7.2 5 6.4 4.7 5.8 4.2L7.2 2.8C7.4 3 7.7 3.1 8 3.1s0.6-0.1 0.8-0.3l1.4 1.4C9.6 4.7 8.8 5 8 5Z" />
+          </svg>
+          {/* Battery */}
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="currentColor" className="ml-1">
+            <rect x="1" y="1" width="20" height="10" rx="3" stroke="currentColor" strokeWidth="1" fill="none" />
+            <rect x="3" y="3" width="16" height="6" rx="1" fill="currentColor" />
+            <path d="M22 4h1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1V4Z" fill="currentColor" opacity="0.6" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Global Top Nav (Hidden on Mobile like original) */}
+      <div className="hidden md:flex items-center justify-between border-b border-white/[0.06] bg-[#111111] px-4 py-3">
         <div className="flex items-center gap-2 pr-6">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="text-white">
             <path d="M16 2L2 30h28L16 2z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
             <path d="M16 10l-8 16h16l-8-16z" fill="currentColor" />
           </svg>
-          <Menu className="h-5 w-5 text-white/50 md:hidden" />
         </div>
 
         <div className="max-w-[480px] flex-1">
@@ -240,17 +265,17 @@ export function DashboardMockup() {
 
         {/* Main panel */}
         <div className="min-w-0 flex-1 overflow-auto bg-[#0a0a0a]">
-          <div className="px-6 py-5 md:px-8 md:pt-8 pb-10">
+          <div className="px-5 py-3 md:px-8 md:pt-8 pb-10">
 
             {/* Breadcrumb & Invite Row */}
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-[0.75rem] text-white/45">
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-2 md:mt-0">
+              <div className="flex items-center gap-2 text-[0.75rem] text-white/45 font-medium tracking-wide">
                 <span>Projects</span>
                 <ChevronRight className="h-3 w-3" />
                 <span className="text-white">Identity Verification</span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-3">
                 <div className="flex items-center -space-x-1.5">
                   <img src={ASSETS.avatars[0]} alt="" className="h-6 w-6 rounded-full object-cover ring-2 ring-[#0a0a0a]" />
                   <img src={ASSETS.avatars[1]} alt="" className="h-6 w-6 rounded-full object-cover ring-2 ring-[#0a0a0a]" />
@@ -268,19 +293,19 @@ export function DashboardMockup() {
             </div>
 
             {/* Giant Title */}
-            <h2 className="mt-4 text-[1.5rem] md:text-[1.75rem] font-semibold text-white tracking-tight">
+            <h2 className="mt-4 text-[1.15rem] md:text-[1.75rem] font-bold text-white tracking-tight">
               Identity Verification
             </h2>
 
             {/* Tabs Row (aligned flex) */}
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.06]">
-              <div className="flex items-center gap-[1.125rem]">
+            <div className="mt-6 md:mt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06]">
+              <div className="flex w-full md:w-auto overflow-x-auto hide-scrollbar whitespace-nowrap items-center gap-[1.125rem] no-scrollbar">
                 {TABS.map((tab, i) => (
                   <span
                     key={tab}
-                    className={`relative flex items-center gap-1.5 pb-3 text-[0.8125rem] font-medium ${i === 0 ? "text-white" : "text-white/45 hover:text-white/70 transition-colors"}`}
+                    className={`relative flex shrink-0 items-center gap-1.5 pb-2 md:pb-3 text-[0.75rem] md:text-[0.8125rem] font-medium ${i === 0 ? "text-white" : "text-white/45 hover:text-white/70 transition-colors"}`}
                   >
-                    {i === 0 && <LayoutGrid className="h-4 w-4" />}
+                    {i === 0 && <LayoutGrid className="hidden md:block h-4 w-4" />}
                     {tab}
                     {i === 5 && <Plus className="ml-1 h-3.5 w-3.5 text-white/30" />}
                     {i === 0 && (
@@ -304,9 +329,9 @@ export function DashboardMockup() {
             </div>
 
             {/* Kanban Columns */}
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-6 flex md:grid flex-nowrap overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-4 md:grid-cols-2 lg:grid-cols-4 pb-4">
               {COLUMNS.map((col, ci) => (
-                <section key={col.title}>
+                <section key={col.title} className="w-[85vw] max-w-[300px] shrink-0 snap-start md:w-auto md:max-w-none">
                   <header className="mb-3.5 flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full" style={{ background: col.tone }} />
                     <h3 className="text-[0.75rem] font-medium text-white/80">{col.title}</h3>

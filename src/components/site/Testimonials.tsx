@@ -121,26 +121,26 @@ export function Testimonials() {
             <QuoteCard item={TESTIMONIALS[0]!} />
 
             {/* Stat Row */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] bg-gradient-to-br from-[#FF0000] to-[#990000] p-6 text-white shadow-[0_4px_40px_rgba(255,0,0,0.3)]">
+            <div className="grid grid-cols-1 gap-4 min-[400px]:grid-cols-2 lg:grid-cols-2">
+              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] bg-gradient-to-br from-[#FF0000] to-[#990000] p-5 sm:p-6 text-white shadow-[0_4px_40px_rgba(255,0,0,0.3)]">
                 <div>
-                  <p className="text-[2.75rem] font-bold leading-none tracking-tight">
-                    80<span className="text-[1.5rem] font-medium">%</span>
+                  <p className="text-[2.25rem] sm:text-[2.75rem] font-bold leading-none tracking-tight">
+                    80<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">%</span>
                   </p>
-                  <p className="mt-3 text-[0.9375rem] font-medium leading-[1.4]">Reduction In<br />Manual Entry</p>
+                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4]">Reduction In<br />Manual Entry</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-[0.875rem] font-medium">
+                <div className="flex items-center gap-1.5 text-[0.8125rem] sm:text-[0.875rem] font-medium">
                   <span className="opacity-80">✦</span> Enterprise
                 </div>
               </div>
-              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] border border-white/5 bg-[#141414] p-6">
+              <div className="flex min-h-[220px] flex-col justify-between rounded-[20px] border border-white/5 bg-[#141414] p-5 sm:p-6">
                 <div>
-                  <p className="text-[2.75rem] font-bold leading-none tracking-tight text-white">
-                    10<span className="text-[1.5rem] font-medium">M+</span>
+                  <p className="text-[2.25rem] sm:text-[2.75rem] font-bold leading-none tracking-tight text-white">
+                    10<span className="text-[1.25rem] sm:text-[1.5rem] font-medium">M+</span>
                   </p>
-                  <p className="mt-3 text-[0.9375rem] font-medium leading-[1.4] text-[#9CA3AF]">Documents<br />Processed</p>
+                  <p className="mt-3 text-[0.875rem] sm:text-[0.9375rem] font-medium leading-[1.4] text-[#9CA3AF]">Documents<br />Processed</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-[0.875rem] font-medium text-[#9CA3AF]">
+                <div className="flex items-center gap-1.5 text-[0.8125rem] sm:text-[0.875rem] font-medium text-[#9CA3AF]">
                   <span className="opacity-80">///</span> Luminous
                 </div>
               </div>

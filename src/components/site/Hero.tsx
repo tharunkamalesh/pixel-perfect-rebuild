@@ -28,32 +28,32 @@ export function Hero() {
       <div className="relative z-10 text-center w-full max-w-[1200px] mx-auto px-4 mt-8 flex flex-col items-center">
 
         <motion.div
-          className="flex items-center gap-3 rounded-full border border-black/10 bg-transparent pl-1.5 pr-5 py-1.5"
+          className="flex items-center gap-2 md:gap-3 rounded-full border border-black/10 bg-transparent pl-1.5 pr-4 md:pr-5 py-1.5"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.8, delay: 0.6, ease: customEase }}
         >
-          <span className="flex items-center justify-center rounded-[20px] bg-[#FF0000] px-3 py-1 text-[0.625rem] font-bold uppercase tracking-wider text-white">
+          <span className="flex shrink-0 items-center justify-center rounded-[20px] bg-[#FF0000] px-2.5 md:px-3 py-1 text-[0.625rem] font-bold uppercase tracking-wider text-white">
             NEW
           </span>
-          <span className="text-[0.875rem] font-medium text-[#3b3b3b]">
+          <span className="text-[0.75rem] md:text-[0.875rem] font-medium text-[#3b3b3b] tracking-tight whitespace-nowrap">
             Enterprise AI Document Intelligence
           </span>
         </motion.div>
 
         <motion.h1
-          className="mt-6 font-semibold text-[#0A0A0A] text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.0] tracking-[-0.05em] w-full max-w-[1100px] mx-auto"
+          className="mt-6 font-semibold text-[#0A0A0A] text-[2.75rem] sm:text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.05] tracking-tight w-full max-w-[1100px] mx-auto px-4 sm:px-0"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.8, delay: 0.7, ease: customEase }}
         >
-          Transform Identity Documents <br className="hidden md:block" /> Into Structured Data With AI
+          Transform Identity Documents Into Structured Data With AI
         </motion.h1>
 
         <motion.p
-          className="lede mt-8 max-w-[960px] leading-[1.5] text-[#525252]"
+          className="mt-5 max-w-[960px] text-[1.0625rem] md:text-[1.25rem] leading-[1.45] text-[#525252] px-4"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -75,7 +75,7 @@ export function Hero() {
 
       </div>
 
-      <div className="w-full flex justify-center pointer-events-none mt-[-80px] lg:mt-[-90px] relative z-0">
+      <div className="w-full flex justify-center pointer-events-none mt-[-180px] sm:mt-[-120px] lg:mt-[-90px] relative z-0">
         {/* Exact minimal funnel core glow utilizing user-provided tight stops */}
         <div className="absolute top-[50%] lg:top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[700px] pointer-events-none -z-10 flex items-center justify-center">
           <div

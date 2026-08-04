@@ -16,7 +16,7 @@ export function Faq() {
 
           {/* Left Column (Headers) */}
           <div>
-            <h2 className="text-[3rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[3.5rem] xl:whitespace-nowrap">
+            <h2 className="text-[2.25rem] sm:text-[3rem] font-semibold leading-[1.1] tracking-tight text-white lg:text-[3.5rem] xl:whitespace-nowrap">
               Frequently asked questions
             </h2>
             <p className="mt-6 text-[1.125rem] leading-relaxed text-[#9CA3AF]">
