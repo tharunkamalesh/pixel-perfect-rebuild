@@ -4,10 +4,11 @@ import { useState } from "react";
 import { NAV_LINKS, ASSETS } from "./content";
 import { LogoMark } from "./LogoMark";
 
-const SOCIAL = [
-  { label: "Twitter", href: "https://twitter.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Instagram", href: "https://instagram.com" },
+const RESOURCES = [
+  { label: "Documentation", href: "#" },
+  { label: "Privacy", href: "#" },
+  { label: "Terms", href: "#" },
+  { label: "Contact", href: "#" },
 ];
 
 export function Footer() {
@@ -36,10 +37,10 @@ export function Footer() {
               </ul>
             </nav>
 
-            <nav aria-label="Social links">
-              <h2 className="text-[0.75rem] text-[#6B7280] mb-6">Social</h2>
+            <nav aria-label="Resources">
+              <h2 className="text-[0.75rem] text-[#6B7280] mb-6">Resources</h2>
               <ul className="flex flex-col gap-4">
-                {SOCIAL.map((s) => (
+                {RESOURCES.map((s) => (
                   <li key={s.label}>
                     <a
                       href={s.href}
@@ -57,7 +58,7 @@ export function Footer() {
 
           <div className="w-full max-w-[400px]">
             <h2 className="text-[1.125rem] font-medium text-black mb-4">
-              What's new, straight to you
+              Stay updated
             </h2>
             <form
               className="flex items-center gap-3"
@@ -80,7 +81,7 @@ export function Footer() {
               </button>
             </form>
             <p className="mt-4 text-[0.75rem] text-[#6B7280]">
-              Includes the latest product updates, productivity tips, and insights.
+              Stay updated with product releases, AI improvements, and enterprise updates.
             </p>
           </div>
 
@@ -101,7 +102,7 @@ export function Footer() {
           </svg>
 
           <h1 className="text-[22vw] lg:text-[20vw] font-bold tracking-tighter leading-none whitespace-nowrap">
-            Accretion
+            Veriis
           </h1>
         </div>
       </div>

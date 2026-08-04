@@ -25,7 +25,7 @@ export function Integrations() {
     <section id="integrations" className="section bg-[#0a0a0a] pt-32 lg:pt-48 pb-20 text-white">
       <div className="mx-auto w-full max-w-[1600px] lg:max-w-none px-6 lg:px-10 xl:px-16">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-          <h2 className="text-[40px] md:text-[56px] font-semibold tracking-tight text-white leading-tight">Integrations</h2>
+          <h2 className="text-[40px] md:text-[56px] font-semibold tracking-tight text-white leading-tight">Integrates With Your Existing Stack</h2>
           <div className="mt-6 flex items-center justify-center gap-3 text-[1.125rem] text-[#9CA3AF]">
             <div className="flex items-center gap-2 rounded-[8px] border border-white/10 bg-white/5 px-2.5 py-1 text-[1rem] font-semibold text-white">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

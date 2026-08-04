@@ -11,7 +11,7 @@ export function HeroGlow() {
             animate={{ opacity: 0.3 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             style={{
-                background: "radial-gradient(ellipse at top, #FF852F 0%, #A30000 45%, #000000 80%, transparent 100%)",
+                background: "radial-gradient(ellipse at top, #FF0000 0%, #A30000 45%, #000000 80%, transparent 100%)",
                 filter: "blur(40px)",
                 borderRadius: "50% 50% 0 0 / 100% 100% 0 0"
             }}

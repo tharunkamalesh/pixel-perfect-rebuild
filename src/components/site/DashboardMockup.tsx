@@ -19,24 +19,24 @@ import {
 import { ASSETS } from "./content";
 
 const SIDEBAR_MAIN = [
-  { label: "Home", icon: Home, count: null, active: true },
-  { label: "My Tasks", icon: ListChecks, count: 7, active: false },
-  { label: "Inbox", icon: Inbox, count: 27, active: false },
+  { label: "Overview", icon: Home, count: null, active: true },
+  { label: "Processing Queue", icon: ListChecks, count: 7, active: false },
+  { label: "Failed Documents", icon: Inbox, count: 3, active: false },
   { label: "Analytics", icon: PieChart, count: null, active: false },
-  { label: "Docs", icon: FileText, count: null, active: false },
-  { label: "Calendar", icon: CalendarDays, count: 4, active: false },
+  { label: "API Keys", icon: FileText, count: null, active: false },
+  { label: "Audit Logs", icon: CalendarDays, count: 4, active: false },
   { label: "Settings", icon: Settings, count: null, active: false },
 ];
 
 const PROJECTS = [
-  { label: "Product & Engineering", tone: "var(--brand)" },
-  { label: "Marketing", tone: "oklch(0.66 0.17 148)" },
-  { label: "Operations", tone: "oklch(0.62 0.19 264)" },
-  { label: "HR & People", tone: "oklch(0.65 0.2 320)" },
-  { label: "Finance", tone: "oklch(0.75 0.16 80)" },
+  { label: "Identity Verification", tone: "var(--brand)" },
+  { label: "Resume Parsing", tone: "oklch(0.66 0.17 148)" },
+  { label: "Invoice Processing", tone: "oklch(0.62 0.19 264)" },
+  { label: "KYC Compliance", tone: "oklch(0.65 0.2 320)" },
+  { label: "Background Checks", tone: "oklch(0.75 0.16 80)" },
 ];
 
-const TABS = ["Board", "Timeline", "Calendar", "Dashboard", "Progress", "Forms"];
+const TABS = ["Pipeline", "Extraction", "Validation", "JSON Output", "Confidence Score", "Logs"];
 
 import { CalendarDays as CalendarIcon, Paperclip, MessageSquare } from "lucide-react";
 
@@ -52,38 +52,38 @@ type Task = {
 
 const COLUMNS = [
   {
-    title: "Backlog Tasks", count: 4, tone: "oklch(0.556 0 0)",
+    title: "Upload Queue", count: 4, tone: "oklch(0.556 0 0)",
     tasks: [
-      { date: "13 Nov, 2025", badge: "Medium", title: "Design onboarding flow", avatars: 2, attachments: 3, comments: 2 },
-      { date: "No due date", badge: "Low", title: "Write product launch announcement", avatars: 2, attachments: 1 }
+      { date: "13 Nov, 2025", badge: "Medium", title: "Passport - John Doe (UK)", avatars: 2, attachments: 3, comments: 2 },
+      { date: "Pending", badge: "Low", title: "Resume - Sarah Smith (PDF)", avatars: 2, attachments: 1 }
     ] as Task[],
     showAddBlock: true
   },
   {
-    title: "To Do Tasks", count: 4, tone: "var(--brand)",
+    title: "Processing", count: 4, tone: "var(--brand)",
     tasks: [
-      { date: "15 Nov, 2025", badge: "Low", title: "Draft Q3 roadmap documents", avatars: 2, moreAvatars: 3, attachments: 5, comments: 7 },
-      { date: "16 Nov, 2025", badge: "Medium", title: "Add dark mode toggle", avatars: 1, comments: 4 },
-      { date: "23 Nov, 2025", badge: "High", title: "Review security compliance checklist", avatars: 2, moreAvatars: 4, comments: 13 },
-      { date: "24 Nov, 2025", badge: "Low", title: "Run employee survey on tool adoption", avatars: 3, attachments: 1 }
+      { date: "15 Nov, 2025", badge: "Medium", title: "National ID OCR Parsing", avatars: 2, moreAvatars: 3, attachments: 5, comments: 7 },
+      { date: "16 Nov, 2025", badge: "High", title: "Driver's License Edge Detection", avatars: 1, comments: 4 },
+      { date: "23 Nov, 2025", badge: "High", title: "PDF Resume Field Extraction", avatars: 2, moreAvatars: 4, comments: 13 },
+      { date: "24 Nov, 2025", badge: "Low", title: "Security Watermark Verification", avatars: 3, attachments: 1 }
     ] as Task[]
   },
   {
-    title: "In Progress", count: 2, tone: "oklch(0.75 0.16 80)",
+    title: "Validation", count: 3, tone: "oklch(0.75 0.16 80)",
     tasks: [
-      { date: "17 Nov, 2025", badge: "High", title: "Improve search functionality", avatars: 2, moreAvatars: 2, comments: 6 },
-      { date: "18 Nov, 2025", badge: "Low", title: "Refactor authentication logic", avatars: 1, attachments: 3 },
-      { date: "22 Nov, 2025", badge: "Low", title: "Review customer support tickets and identify recurring issues", avatars: 2, moreAvatars: 2, comments: 6 }
+      { date: "17 Nov, 2025", badge: "High", title: "Low confidence flag: DOB format", avatars: 2, moreAvatars: 2, comments: 6 },
+      { date: "18 Nov, 2025", badge: "Medium", title: "Name mismatch user input check", avatars: 1, attachments: 3 },
+      { date: "22 Nov, 2025", badge: "Medium", title: "Review blurred scan quality", avatars: 2, moreAvatars: 2, comments: 6 }
     ] as Task[],
     showAddBlock: true
   },
   {
-    title: "Done", count: 4, tone: "var(--success)",
+    title: "Extracted & Exported", count: 4, tone: "var(--success)",
     tasks: [
-      { date: "09 Nov, 2025", title: "Test notification system", avatars: 2, moreAvatars: 2 },
-      { date: "07 Nov, 2025", title: "Create detailed wireframes for onboarding flow", avatars: 2, moreAvatars: 5 },
-      { date: "05 Nov, 2025", title: "Write technical documentation authentication module", avatars: 1, attachments: 2 },
-      { date: "04 Nov, 2025", title: "Publish Q2 performance metrics", avatars: 3, moreAvatars: 5 }
+      { date: "09 Nov, 2025", title: "Passport - Approved (Confidence: 99.8%)", avatars: 2, moreAvatars: 2 },
+      { date: "07 Nov, 2025", title: "Resume - JSON Payload Delivered", avatars: 2, moreAvatars: 5 },
+      { date: "05 Nov, 2025", title: "ID Verification - Passed Compliance", avatars: 1, attachments: 2 },
+      { date: "04 Nov, 2025", title: "Export Webhook Triggered Successfully", avatars: 3, moreAvatars: 5 }
     ] as Task[]
   },
 ];
@@ -91,7 +91,7 @@ const COLUMNS = [
 const badgeColors = {
   Low: "border-white/10 text-white/50",
   Medium: "border-yellow-500/20 text-yellow-500/90",
-  High: "border-orange-500/20 text-orange-500/90"
+  High: "border-red-500/20 text-red-500/90"
 };
 
 function TaskCard({ task }: { task: Task }) {
@@ -209,7 +209,7 @@ export function DashboardMockup() {
                 <Icon className="h-4 w-4" strokeWidth={1.6} />
                 <span className="flex-1">{label}</span>
                 {count !== null && (
-                  <span className="rounded-full text-[0.625rem] text-[#FF5500]">
+                  <span className="rounded-full text-[0.625rem] text-[#FF0000]">
                     {count}
                   </span>
                 )}
@@ -247,7 +247,7 @@ export function DashboardMockup() {
               <div className="flex items-center gap-2 text-[0.75rem] text-white/45">
                 <span>Projects</span>
                 <ChevronRight className="h-3 w-3" />
-                <span className="text-white">Product &amp; Engineering</span>
+                <span className="text-white">Identity Verification</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -269,7 +269,7 @@ export function DashboardMockup() {
 
             {/* Giant Title */}
             <h2 className="mt-4 text-[1.5rem] md:text-[1.75rem] font-semibold text-white tracking-tight">
-              Product &amp; Engineering
+              Identity Verification
             </h2>
 
             {/* Tabs Row (aligned flex) */}

@@ -23,14 +23,10 @@ export function Showcase() {
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16 xl:gap-20">
           <div className="w-full pl-0">
             <h2 className="text-[2.5rem] lg:text-[3.25rem] font-semibold leading-[1.05] tracking-[-0.04em] text-white">
-              Get more done, together,
-              <br />
-              anytime, anywhere
+              See Veriis In Action
             </h2>
             <p className="mt-5 text-[1.125rem] leading-[1.5] text-[#9CA3AF]">
-              This is how we help you stay organized,
-              <br />
-              collaborate with your team.
+              Watch how Veriis extracts structured information from identity documents and resumes in real time—from upload to structured output.
             </p>
             <div role="tablist" aria-label="Product highlights" className="mt-28 flex flex-col">
               {SHOWCASE_ITEMS.map((item, i) => {
@@ -43,7 +39,7 @@ export function Showcase() {
                           initial={{ width: "0%" }}
                           animate={{ width: "100%" }}
                           transition={{ duration: 6, ease: "linear" }}
-                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-orange-500 to-yellow-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]"
+                          className="absolute left-0 top-0 h-full bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_8px_rgba(255,0,0,0.6)]"
                         />
                       )}
                     </div>

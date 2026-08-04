@@ -6,7 +6,8 @@
 export const NAV_LINKS = [
   { label: "Features", href: "#features" },
   { label: "Integrations", href: "#integrations" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "API", href: "#api" },
+  { label: "Security", href: "#security" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ] as const;
@@ -79,24 +80,24 @@ export const SHOWCASE_ITEMS = [
 
 export const INTEGRATION_GROUPS = [
   {
-    category: "Engineering",
-    body: "Sync your code, issues, and deployments directly into your workflow.",
-    tools: ["GitHub", "GitLab", "Bitbucket", "Jira", "Sentry", "CircleCI"],
+    category: "HR & Recruitment",
+    body: "Automate resume parsing and onboarding directly in your ATS.",
+    tools: ["Greenhouse", "Lever", "BambooHR", "Workday"],
   },
   {
-    category: "Customer Experience",
-    body: "Connect support and CRM tools to turn conversations into action.",
-    tools: ["Zendesk", "Intercom", "Hubspot"],
+    category: "Identity & Compliance",
+    body: "Enhance KYC workflows with secure identity verification.",
+    tools: ["Onfido", "Persona", "Sumsub"],
   },
   {
-    category: "Media & Design",
-    body: "Bring designs, assets, and feedback into your projects seamlessly.",
-    tools: ["Figma", "Canva", "Miro", "Sketch", "Loom"],
+    category: "Cloud Storage",
+    body: "Process documents directly from your secure cloud storage providers.",
+    tools: ["Google Drive", "Dropbox", "OneDrive"],
   },
   {
-    category: "Analytics",
-    body: "Connect your data tools to track performance and uncover insights.",
-    tools: ["Google Analytics", "Hotjar", "Mixpanel"],
+    category: "Automation",
+    body: "Trigger intelligent document extraction within your automation pipelines.",
+    tools: ["Zapier", "Make", "n8n"],
   },
 ] as const;
 
@@ -109,38 +110,33 @@ export type Testimonial = {
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    quote:
-      "Accretion has completely changed how we organize our work. Our team finally has one place to keep tasks, updates, and files without getting lost in endless threads.",
-    name: "Marcus C.",
-    company: "Corebyte",
+    quote: "Veriis reduced our onboarding time from minutes to seconds.",
+    name: "Sarah M.",
+    company: "Operations Manager",
     avatar: ASSETS.avatars[0],
   },
   {
-    quote:
-      "I love how easy it is to jump between projects. No more wasting time figuring out what's next.",
-    name: "Elena N.",
-    company: "Studio Polaris",
+    quote: "The extraction accuracy is outstanding—even on poor-quality scans.",
+    name: "David R.",
+    company: "Engineering Lead",
     avatar: ASSETS.avatars[1],
   },
   {
-    quote:
-      "Our clients noticed the difference right away. Clear progress, better communication, and fewer delays—everything just feels smoother now.",
-    name: "Hannah S.",
-    company: "Everpath",
+    quote: "Integration was simple and our manual workload dropped dramatically.",
+    name: "Emily K.",
+    company: "Product Manager",
     avatar: ASSETS.avatars[2],
   },
   {
-    quote:
-      "What I love about Accretion is that it doesn't force you into one rigid way of working.",
+    quote: "Veriis handles 10x the document volume with half the manual errors.",
     name: "Taylor S.",
-    company: "HorizonWorks",
+    company: "Compliance Officer",
     avatar: ASSETS.avatars[3],
   },
   {
-    quote:
-      "The mobile app is a game-changer. I can check in on projects, add updates, or review tasks while I'm commuting. It keeps me connected without slowing me down.",
+    quote: "Finally, a platform that actually understands complex resume layouts instantly.",
     name: "David O.",
-    company: "NimbusWorks",
+    company: "Head of Talent",
     avatar: ASSETS.avatars[4],
   },
   {
@@ -238,28 +234,23 @@ export const PRICING_PLANS = [
 
 export const FAQS = [
   {
-    question: "Is there a free version?",
-    answer:
-      "Yes. The Starter plan is free forever and includes up to 3 projects, 50 tasks per month, and access on mobile and desktop — no credit card required.",
+    question: "Which documents are supported?",
+    answer: "Veriis supports passports, national IDs, driver's licenses from over 150 countries, and extracts detailed fields from global resumes and CVs.",
   },
   {
-    question: "Can I change my plan later?",
-    answer:
-      "Absolutely. You can upgrade, downgrade, or cancel at any time from your billing settings. Changes take effect immediately and we prorate the difference.",
+    question: "Is document data stored?",
+    answer: "No. Veriis processes documents transiently via memory. We do not store PII or sensitive identities. All instances comply strictly with GDPR and SOC-2 standard controls.",
   },
   {
-    question: "Do you offer a mobile app?",
-    answer:
-      "Yes — native apps for iOS and Android keep every project, task, and comment in sync with the web app in real time.",
+    question: "Can Veriis integrate with our systems?",
+    answer: "Yes, we provide REST APIs, webhooks, and native SDKs that make integrating Veriis into HR platforms, ATS software, or custom internal systems completely frictionless.",
   },
   {
-    question: "Do you offer discounts for yearly billing?",
-    answer:
-      "Yearly billing saves you roughly two months compared to paying monthly. The discount is applied automatically at checkout.",
+    question: "Does Veriis support batch processing?",
+    answer: "Absolutely. Our enterprise engine securely computes thousands of unstructured document requests continuously via asynchronous webhooks or batch upload API calls.",
   },
   {
-    question: "What payment methods do you accept?",
-    answer:
-      "All major credit and debit cards, Apple Pay, and Google Pay. Enterprise customers can also pay by invoice or bank transfer.",
+    question: "Is Veriis enterprise-ready?",
+    answer: "Yes. Veriis powers global financial infrastructures with 99.99% uptime, strict privacy SLAs, zero-data-retention deployments, and enterprise SLAs designed for compliance scale.",
   },
 ] as const;

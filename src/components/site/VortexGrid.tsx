@@ -12,24 +12,26 @@ const min_R = 280;
 const max_R = 3580;
 // +8% vertical compression for deeper perspective feel
 const perspective = 0.24;
-const max_depth = 145;
+const max_depth = 230; // Increased depth so it looks like it continues downward
 const base_y = -50;
 
 // Exact palette per design spec
-const colorOuter = new THREE.Color("#B99C6A"); // normal grid lines outer
-const colorMid = new THREE.Color("#BFA070"); // mid-distance
-const colorRim = new THREE.Color("#C7A365"); // near funnel – slightly warmer
-const colorInside = new THREE.Color("#C7A365"); // inner funnel – same warm tone
-const animLineColor = new THREE.Color("#D89A3D"); // accent lines – muted gold, never orange
+// Exact reference palette: #C79D49 (199, 157, 73) exactly per user specs.
+const colorOuter = new THREE.Color("#C79D49");
+const colorMid = new THREE.Color("#C79D49");
+const colorRim = new THREE.Color("#C79D49");
+const colorInside = new THREE.Color("#C79D49");
+const animLineColor = new THREE.Color("#C79D49");
 
 function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number, number, number, number] {
     let alpha = 1.0;
     const color = new THREE.Color();
 
     if (t < 0) {
-        // Inner funnel: progressively lighter, dissolves into white center glow
-        alpha = Math.max(0, 1.0 - Math.abs(t) * 10.0);
-        color.copy(colorRim); // warm tone inside
+        // Inner funnel: distinct visibility extending downwards
+        // Keep them softly visible yet elegant based on 0.28 base tracking 
+        alpha = Math.max(0, 1.0 - Math.abs(t) * 0.9) * 1.5;
+        color.copy(colorInside);
     } else {
         // Outer: Gaussian so lines fade near all edges naturally
         alpha = Math.exp(-3.0 * t * t);
@@ -45,28 +47,39 @@ function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number,
     }
 
     if (isThick) {
-        alpha *= 0.55; // rim rings — clearly visible like Image 2
+        alpha *= 1.2;
     } else if (isRadial) {
-        alpha *= 0.42; // radial spokes — well defined
+        alpha *= 1.0;
     } else {
-        alpha *= 0.35; // circular rings — good contrast
+        alpha *= 0.8;
     }
+
+    // Scale back globally near the 0.28 constraint
+    alpha *= 0.35;
 
     return [color.r, color.g, color.b, alpha];
 }
 
 function computeSurface(t: number) {
-    // Wider opening: stronger linear component near rim for natural curvature
-    const bend = t > 0 ? Math.pow(t, 2.1) : -Math.pow(-t, 1.5);
-    let r = min_R + (max_R - min_R) * (0.82 * bend + 0.18 * t);
+    let r;
+    if (t >= 0) {
+        // Outer rings: stronger linear component near rim for natural curvature
+        const bend = Math.pow(t, 2.1);
+        r = min_R + (max_R - min_R) * (0.82 * bend + 0.18 * t);
+    } else {
+        // Inner funnel: deep descending tunnel geometry. 
+        // Let the radius gradually shrink asymptotically so lines converge visually infinitely deep
+        r = min_R * (1.0 / (1.0 + Math.abs(t) * 4.0));
+    }
     if (r < 0) r = 0;
 
     let depth;
     if (t >= 0) {
-        // Smoother transition into funnel – slightly more curvature
+        // Smoother transition into funnel
         depth = max_depth * Math.pow(1 - t, 1.65);
     } else {
-        depth = max_depth - (max_depth * 1.8 * t) + (4500 * t * t);
+        // Plunge downwards drastically as it goes inside, simulating an infinite drop
+        depth = max_depth + 2800 * Math.pow(Math.abs(t), 1.5);
     }
 
     const cy = base_y + depth;
@@ -117,14 +130,14 @@ function AnimatedRadial({ allowedIndices, delay }: { allowedIndices: number[], d
             const tailFade = 1.0 - (k / 14);
             let alpha = 1.0;
             if (t_prog < 0) {
-                alpha = Math.max(0, 1.0 - Math.abs(t_prog) * 12.0);
+                alpha = Math.max(0, 1.0 - Math.abs(t_prog) * 2.2);
             } else {
                 // Slower falloff so they stay alive near edges
                 alpha = Math.exp(-1.5 * t_prog * t_prog);
             }
 
-            // Ultra-visible: strongly bump opacity (1.5x) so they cut through darkness and css masks
-            colAttr.setXYZW(k, animLineColor.r, animLineColor.g, animLineColor.b, Math.min(1.0, alpha * tailFade * 1.5));
+            // Reduced multiplier slightly so they don't appear too visually thick, keeping them elegant
+            colAttr.setXYZW(k, animLineColor.r, animLineColor.g, animLineColor.b, Math.min(1.0, alpha * tailFade * 1.8));
         }
 
         posAttr.needsUpdate = true;
@@ -151,7 +164,8 @@ function VortexGeometry() {
 
     const t_values = useMemo(() => {
         const arr = [];
-        for (let i = -10; i <= RINGS_COUNT; i++) {
+        // Dramatically increased negative ring limits to forge a significantly deeper physical tunnel core
+        for (let i = -26; i <= RINGS_COUNT; i++) {
             arr.push(i / RINGS_COUNT);
         }
         return arr;
@@ -335,15 +349,17 @@ export function VortexGrid() {
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{
                         maskImage: [
-                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
-                            "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
+                            "radial-gradient(ellipse at center, black 30%, transparent 85%)",
+                            "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+                            "linear-gradient(to bottom, transparent 0%, black 25%, black 80%, transparent 100%)",
                         ].join(", "),
                         WebkitMaskImage: [
-                            "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
-                            "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
+                            "radial-gradient(ellipse at center, black 30%, transparent 85%)",
+                            "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
+                            "linear-gradient(to bottom, transparent 0%, black 25%, black 80%, transparent 100%)",
                         ].join(", "),
                         maskComposite: "intersect",
-                        WebkitMaskComposite: "destination-in",
+                        WebkitMaskComposite: "source-in",
                     }}
                 >
                     <Canvas
@@ -353,6 +369,16 @@ export function VortexGrid() {
                         gl={{ antialias: true, alpha: true }}
                     >
                         <VortexGeometry />
+                        <AnimatedRadial allowedIndices={[31, 32]} delay={0.0} /> {/* Bottom center */}
+                        <AnimatedRadial allowedIndices={[15, 16]} delay={0.7} /> {/* Bottom right */}
+                        <AnimatedRadial allowedIndices={[46, 47]} delay={1.4} /> {/* Left */}
+                        <AnimatedRadial allowedIndices={[60, 61, 0, 1]} delay={2.1} /> {/* Top center */}
+                        <AnimatedRadial allowedIndices={[24, 25, 26]} delay={0.4} /> {/* Bottom right-ish */}
+                        <AnimatedRadial allowedIndices={[7, 8, 9]} delay={1.1} /> {/* Top right */}
+                        <AnimatedRadial allowedIndices={[38, 39, 40]} delay={1.8} /> {/* Bottom left */}
+                        <AnimatedRadial allowedIndices={[53, 54, 55]} delay={0.9} /> {/* Top left */}
+                        <AnimatedRadial allowedIndices={[20, 21]} delay={2.5} /> {/* Bottom right fill */}
+                        <AnimatedRadial allowedIndices={[42, 43]} delay={1.6} /> {/* Bottom left fill */}
                     </Canvas>
                 </div>
             </div>

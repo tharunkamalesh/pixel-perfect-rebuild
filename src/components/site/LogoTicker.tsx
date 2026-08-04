@@ -1,6 +1,6 @@
 const PARTNERS = [
   {
-    name: "Luminous",
+    name: "HR Platforms",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 14l8-8" />
@@ -10,7 +10,7 @@ const PARTNERS = [
     ),
   },
   {
-    name: "Spherule",
+    name: "FinTech",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -20,10 +20,9 @@ const PARTNERS = [
     ),
   },
   {
-    name: "Sisyphus",
+    name: "Healthcare",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-        {/* Dynamic geometric polygons resembling the isometric "S" staircase ribbons */}
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
         <path d="M2 17l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
         <path d="M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
@@ -32,7 +31,7 @@ const PARTNERS = [
     ),
   },
   {
-    name: "Capsule",
+    name: "Staffing",
     icon: (
       <svg width="34" height="24" viewBox="0 0 34 24" fill="currentColor">
         <circle cx="12" cy="12" r="10" fillOpacity="0.4" />
@@ -41,25 +40,35 @@ const PARTNERS = [
     ),
   },
   {
-    name: "Acme Corp",
+    name: "Enterprise",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3l10 18H2L12 3z" />
         <path d="M12 15l-4 6M12 15l4 6M12 15v-8" />
       </svg>
     ),
+  },
+  {
+    name: "Identity Verification",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 14l8-8" />
+        <path d="M8 18l8-8" />
+        <path d="M12 22l8-8" />
+      </svg>
+    ),
   }
 ];
 
-/** Infinite logo marquee — "Trusted by teams everywhere". */
+/** Infinite logo marquee — "Trusted by teams building modern document workflows". */
 export function LogoTicker() {
   return (
-    <section aria-label="Trusted by teams everywhere" className="relative pt-12 md:pt-16 pb-20 md:pb-32 overflow-hidden bg-transparent">
+    <section aria-label="Trusted by teams building modern document workflows" className="relative pt-12 md:pt-16 pb-20 md:pb-32 overflow-hidden bg-transparent">
 
       {/* Explicit fade layers removed in favor of CSS mask-image for agnostic background blending */}
 
       <div className="w-full max-w-[1440px] mx-auto">
-        <p className="text-center text-[0.9375rem] font-semibold text-black">Trusted by teams everywhere</p>
+        <p className="text-center text-[0.9375rem] font-semibold text-black">Trusted by teams building modern document workflows</p>
 
         <div
           className="relative mt-8 md:mt-12 flex items-center overflow-hidden w-full"
