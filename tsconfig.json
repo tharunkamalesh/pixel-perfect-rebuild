@@ -16,7 +16,8 @@
     "src/routeTree.gen.ts",
     "src/server.ts",
     "src/start.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "src/temp.tsx"
   ],
   "compilerOptions": {
     "target": "ES2022",
