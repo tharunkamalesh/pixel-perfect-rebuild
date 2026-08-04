@@ -63,25 +63,27 @@ const PARTNERS = [
 /** Infinite logo marquee — "Trusted by teams building modern document workflows". */
 export function LogoTicker() {
   return (
-    <section aria-label="Trusted by teams building modern document workflows" className="relative pt-12 md:pt-16 pb-20 md:pb-32 overflow-hidden bg-transparent">
+    <section aria-label="Trusted by teams building modern document workflows" className="relative pt-12 md:pt-16 pb-20 md:pb-32 overflow-hidden bg-gradient-to-b from-[#EFEBE4] via-[#F8F7F2] to-transparent">
 
       {/* Explicit fade layers removed in favor of CSS mask-image for agnostic background blending */}
 
-      <div className="w-full max-w-[1440px] mx-auto">
-        <p className="text-center text-[0.9375rem] font-semibold text-black">Trusted by teams building modern document workflows</p>
+      <div className="w-full max-w-[1440px] mx-auto relative z-10">
+        <p className="text-center text-[1.125rem] md:text-[1.35rem] font-bold text-black px-4 tracking-tight">
+          Trusted by teams building <br className="md:hidden" /> modern document workflows
+        </p>
 
         <div
           className="relative mt-8 md:mt-12 flex items-center overflow-hidden w-full"
           style={{
-            maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}
         >
           <div className="flex w-max animate-[marquee_25s_linear_infinite] items-center gap-16 md:gap-24 px-8 md:px-12">
             {[...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS].map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
-                className="flex items-center gap-3 text-black opacity-85 transition-opacity hover:opacity-100"
+                className="flex items-center gap-3 text-black opacity-100"
               >
                 <div className="text-black shrink-0">
                   {partner.icon}

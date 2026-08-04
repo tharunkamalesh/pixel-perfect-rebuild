@@ -37,6 +37,7 @@ export { SectionHeading };
 
 export function Features() {
   const containerRef = useRef<HTMLElement>(null);
+  const phoneCardRef = useRef<HTMLDivElement>(null);
 
   // Track scroll progress purely when this specific section is in viewport
   const { scrollYProgress } = useScroll({
@@ -48,11 +49,12 @@ export function Features() {
   const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
-  const { scrollYProgress: fullScroll } = useScroll({
-    target: containerRef,
+  // Specifically track the exact view frame of the phone card for aggressive parallax
+  const { scrollYProgress: phoneScroll } = useScroll({
+    target: phoneCardRef,
     offset: ["start end", "end start"]
   });
-  const phoneY = useTransform(fullScroll, [0, 1], [40, -40]);
+  const phoneY = useTransform(phoneScroll, [0, 1], [250, -100]);
 
   return (
     <section ref={containerRef} id="features" className="section dark relative bg-transparent text-foreground pt-[220px] sm:pt-[240px] md:pt-[200px] lg:pt-[240px] z-0 overflow-visible">
@@ -92,7 +94,7 @@ export function Features() {
         <div className="mx-auto flex w-full flex-col gap-6 lg:grid lg:grid-cols-4">
 
           {/* Card 1: Mobile App (Left) */}
-          <div className="lg:col-span-2 lg:row-span-2 relative flex min-h-[500px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pb-5 lg:p-10 lg:pb-6">
+          <div ref={phoneCardRef} className="lg:col-span-2 lg:row-span-2 relative flex min-h-[500px] flex-col overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pb-5 lg:p-10 lg:pb-6">
             <div className="relative z-10 w-full max-w-lg shrink-0">
               <h3 className="text-[1.5rem] font-semibold tracking-tight text-white md:text-[1.75rem]">
                 Intelligent Document Processing

@@ -342,11 +342,19 @@ export function VortexGrid() {
                 className="absolute left-0 right-0 pointer-events-none"
                 style={{ top: "-100px", bottom: "0px" }}
             >
-
+                {/* Robust absolute HTML/CSS ambient glow layered directly behind the Canvas.
+                    Guaranteed to render across all devices and desktops, completely bypassing WebGL shader issues. */}
+                <div
+                    className="absolute z-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-90 md:opacity-75 lg:opacity-60 w-[550px] h-[250px] -bottom-[100px] md:w-[1000px] md:h-[500px] md:-bottom-[200px]"
+                    style={{
+                        background: "radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 235, 170, 0.6) 8%, rgba(255, 160, 50, 0.3) 25%, rgba(255, 107, 0, 0.1) 55%, transparent 75%)",
+                        filter: "blur(24px)"
+                    }}
+                />
 
                 {/* 4-way edge fade: left, right, top, bottom all dissolve via intersected mask gradients */}
                 <div
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover z-10"
                     style={{
                         maskImage: [
                             "radial-gradient(ellipse at center, black 30%, transparent 85%)",

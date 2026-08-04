@@ -33,14 +33,17 @@ export function CtaBanner() {
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center text-center px-6">
         <h2 className="text-[2.5rem] font-bold tracking-tight text-black md:text-[3.5rem] leading-[1.05]">
-          Pull your team in<br className="max-sm:hidden" /> with Accretion
+          Ready to Transform Your<br className="max-sm:hidden" /> Document Workflow?
         </h2>
         <p className="mt-5 max-w-2xl text-[1.0625rem] leading-[1.65] text-[#71717A] md:text-[1.125rem]">
-          Your team's next big win starts here. Try Accretion and experience simpler, smarter task management built for growth.
+          Eliminate manual data entry, accelerate onboarding, and integrate AI-powered document extraction into your business in minutes. Built for secure, accurate, and enterprise-scale processing.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <button className="w-full sm:w-auto rounded-[12px] bg-[#141414] px-8 py-3.5 text-[0.9375rem] font-medium text-white shadow-md transition-all hover:bg-black hover:shadow-lg">
-            Get started
+            Get Started
+          </button>
+          <button className="w-full sm:w-auto rounded-[12px] border border-black/10 bg-white px-8 py-3.5 text-[0.9375rem] font-medium text-black shadow-sm transition-all hover:bg-[#f2f2f2]">
+            Request a Demo
           </button>
         </div>
       </div>

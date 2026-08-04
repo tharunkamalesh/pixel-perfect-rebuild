@@ -67,7 +67,7 @@ export function Footer() {
           {/* Automatically stacks to TOP on Mobile, sits RIGHT on Desktop */}
           <div className="w-full max-w-[400px]">
             <h2 className="text-[1.125rem] font-medium text-black mb-4">
-              What's new, straight to you
+              Stay Updated with Veriis
             </h2>
             <form
               className="flex flex-col sm:flex-row gap-3"
@@ -82,7 +82,7 @@ export function Footer() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="jane@framer.com"
+                placeholder="Enter your work email"
                 className="w-full rounded-[8px] bg-black/[0.04] px-4 py-3 text-[0.875rem] text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-black/10"
               />
               <button type="submit" className="w-full sm:w-auto shrink-0 rounded-[8px] bg-[#222] px-6 py-3 text-[0.875rem] font-medium text-white transition-colors hover:bg-black">
@@ -90,10 +90,17 @@ export function Footer() {
               </button>
             </form>
             <p className="mt-4 text-[0.75rem] text-[#6B7280]">
-              Includes the latest product updates, productivity tips, and insights.
+              Get product updates, API releases, AI innovations, security announcements, and enterprise document intelligence insights delivered to your inbox.
             </p>
           </div>
 
+        </div>
+
+        {/* Veriis Company Desc Blurb */}
+        <div className="mt-12 md:mt-16 border-t border-black/5 pt-8 text-center md:text-left">
+          <p className="text-[0.875rem] text-[#6B7280] max-w-2xl mx-auto md:mx-0">
+            Veriis transforms identity documents and resumes into trusted, structured data using enterprise-grade AI. Built for speed, security, privacy, and scale.
+          </p>
         </div>
       </div>
 

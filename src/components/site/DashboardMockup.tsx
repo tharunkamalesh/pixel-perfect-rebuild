@@ -156,7 +156,7 @@ function TaskCard({ task }: { task: Task }) {
 /** Product UI mockup shown in the hero — rebuilt as real markup, not an image. */
 export function DashboardMockup() {
   return (
-    <div className="card-dark relative mx-auto w-full md:max-w-none overflow-hidden rounded-[28px] md:rounded-[24px] shadow-float bg-[#0a0a0a] border border-white/[0.06] max-h-[640px] md:max-h-none">
+    <div className="card-dark relative mx-auto w-full md:max-w-none overflow-hidden rounded-[28px] md:rounded-[24px] shadow-[0_60px_120px_-20px_rgba(0,0,0,0.7)] bg-[#0a0a0a] border border-white/[0.06] max-h-[640px] md:max-h-none">
 
       {/* Fake iOS Status Bar (Visible only on mobile) */}
       <div className="flex md:hidden items-center justify-between px-6 pt-4 pb-2">
