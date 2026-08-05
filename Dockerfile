@@ -51,5 +51,7 @@ EXPOSE 3000
 ENV PORT=3000
 # set hostname to 0.0.0.0
 ENV HOSTNAME="0.0.0.0"
+# Increase keep-alive timeout to be greater than load balancer timeout (Traefik/Dokploy)
+ENV KEEP_ALIVE_TIMEOUT=120000
 
 CMD ["node", "server.js"]
