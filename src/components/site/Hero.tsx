@@ -11,17 +11,16 @@ export function Hero() {
     hidden: { opacity: 0, scale: 1.2, y: -20 },
     visible: { opacity: 1, scale: 1, y: 0 },
   };
-  return (
-    <section id="home" className="relative w-full min-h-[700px] bg-[#F8F5EE] flex flex-col items-center justify-center overflow-hidden pt-[120px] md:pt-[150px]">
 
-      {/* Elegantly subtle edge haze - incredibly faint per request */}
+  return (
+    <section id="home" className="relative w-full min-h-[700px] bg-[#F7F1E5] flex flex-col items-center justify-center overflow-hidden pt-[120px] md:pt-[150px]">
+
+      {/* Upper Canvas Background Gradient (#FAF6EE to #F7F1E5) */}
       <div
-        className="absolute top-[40%] left-[-20%] w-[1000px] h-[1000px] blur-[250px] pointer-events-none z-0"
-        style={{ background: 'radial-gradient(circle at left center, rgba(245,193,84,0.06), transparent 70%)' }}
-      />
-      <div
-        className="absolute top-[40%] right-[-20%] w-[1000px] h-[1000px] blur-[250px] pointer-events-none z-0"
-        style={{ background: 'radial-gradient(circle at right center, rgba(245,193,84,0.06), transparent 70%)' }}
+        className="absolute top-0 inset-x-0 h-[650px] pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, #FAF6EE 0%, rgba(250, 246, 238, 0) 100%)"
+        }}
       />
 
       {/* Foreground Staggered Content */}
@@ -75,20 +74,13 @@ export function Hero() {
 
       </div>
 
-      <div className="w-full flex justify-center pointer-events-none mt-[-180px] sm:mt-[-120px] lg:mt-[-90px] relative z-0">
-        {/* Exact minimal funnel core glow utilizing user-provided tight stops */}
-        <div className="absolute top-[50%] lg:top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[700px] pointer-events-none -z-10 flex items-center justify-center">
-          <div
-            className="w-full h-full blur-[100px]"
-            style={{
-              background: 'radial-gradient(ellipse 650px 325px at 50% 65%, rgba(255,250,240,0.95) 0%, rgba(245,193,84,0.18) 40%, rgba(245,193,84,0.06) 70%, transparent 100%)'
-            }}
-          />
-        </div>
+      {/* Increased the -translate-y to push the funnel even further up without affecting the dashboard underneath */}
+      <div className="w-full flex justify-center pointer-events-none mt-[-180px] sm:mt-[-120px] lg:mt-[-90px] -translate-y-[50px] md:-translate-y-[90px] relative z-0">
+        {/* Redundant overarching Hero glows REMOVED! Only the specific VortexGrid funnel will cast color! */}
         <VortexGrid />
       </div>
 
-      <div className="mt-[20px] md:mt-[40px] lg:mt-[50px] xl:mt-[60px] w-full max-w-[1600px] px-3 md:px-8 relative z-10">
+      <div className="mt-[5px] md:mt-[15px] lg:mt-[20px] xl:mt-[30px] w-full max-w-[1600px] px-3 md:px-8 relative z-10">
         <DashboardMockup />
       </div>
     </section>
