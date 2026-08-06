@@ -264,7 +264,7 @@ export function DashboardMockup() {
         </aside>
 
         {/* Main panel */}
-        <div className="min-w-0 flex-1 overflow-auto bg-[#0a0a0a]">
+        <div className="min-w-0 flex-1 overflow-hidden bg-[#0a0a0a]">
           <div className="px-5 py-3 md:px-8 md:pt-8 pb-10">
 
             {/* Breadcrumb & Invite Row */}
@@ -299,7 +299,7 @@ export function DashboardMockup() {
 
             {/* Tabs Row (aligned flex) */}
             <div className="mt-6 md:mt-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06]">
-              <div className="flex w-full md:w-auto overflow-x-auto hide-scrollbar whitespace-nowrap items-center gap-[1.125rem] no-scrollbar">
+              <div className="flex w-full md:w-auto overflow-x-auto whitespace-nowrap items-center gap-[1.125rem] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {TABS.map((tab, i) => (
                   <span
                     key={tab}

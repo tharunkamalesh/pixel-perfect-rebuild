@@ -70,15 +70,17 @@ export function Showcase() {
                         }`}
                     >
                       <div className="relative flex h-[280px] sm:h-[400px] w-full overflow-hidden rounded-[24px] bg-[#f8f6f1] shadow-xl">
-                        <video
-                          key={item.video}
-                          src={item.video}
-                          autoPlay={isActive}
-                          muted
-                          loop
-                          playsInline
-                          className="h-full w-full object-contain"
-                        />
+                        {isActive && (
+                          <video
+                            key={item.video}
+                            src={item.video}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="h-full w-full object-contain"
+                          />
+                        )}
                       </div>
                     </div>
 

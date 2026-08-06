@@ -15,7 +15,7 @@ export function CtaBanner() {
   const scaleY = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
   return (
-    <section ref={containerRef} className="bg-[#F8F7F2] pt-[200px] sm:pt-[220px] md:pt-[260px] pb-12 md:pb-24 lg:pb-32 relative overflow-visible z-0">
+    <section ref={containerRef} className="bg-[#F8F7F2] pt-[200px] sm:pt-[240px] md:pt-[280px] lg:pt-[360px] xl:pt-[420px] 2xl:pt-[480px] pb-12 md:pb-24 lg:pb-32 relative overflow-visible z-0">
 
       {/* Inverted dripping horizon */}
       <motion.div className="pointer-events-none absolute top-[-1px] left-0 right-0 z-0 flex justify-center">

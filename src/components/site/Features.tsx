@@ -218,7 +218,7 @@ export function Features() {
           {/* Card 4: Smart Automation (Right Box - AI Pipeline) */}
           <div className="lg:col-span-1 lg:row-span-2 relative flex min-h-[500px] flex-col justify-end overflow-hidden rounded-[24px] bg-gradient-to-br from-[#FF0000] to-[#800000] p-8 lg:p-10">
             {/* Visual Flow diagram */}
-            <div className="absolute top-12 left-1/2 flex -translate-x-1/2 flex-col gap-[1.1rem] w-full max-w-[280px]">
+            <div className="relative mx-auto flex flex-col gap-[1.1rem] w-full max-w-[280px] mb-12 mt-4">
               {["Upload Document", "Detect Document Type", "Extract Fields", "Validate Data", "Export Structured JSON"].map((step, i) => (
                 <div
                   key={i}
@@ -277,7 +277,7 @@ export function Features() {
               }
             `}</style>
 
-            <div className="relative z-10 mt-auto pt-48">
+            <div className="relative z-10 mt-auto">
               <h3 className="text-[1.5rem] font-semibold tracking-tight text-white md:text-[1.75rem]">
                 AI Processing Pipeline
               </h3>
@@ -288,8 +288,8 @@ export function Features() {
           </div>
 
           {/* Card 3: JSON Output (Middle Bottom) - Appears last on mobile */}
-          <div className="lg:col-span-1 lg:row-span-1 relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[240px]">
-            <div className="absolute left-0 top-0 w-full h-[260px] flex items-center justify-center">
+          <div className="lg:col-span-1 lg:row-span-1 relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] border border-white/5 bg-[#0a0a0a] p-8 pt-[280px] lg:pt-[320px]">
+            <div className="absolute left-0 top-0 w-full h-[240px] lg:h-[280px] flex items-center justify-center">
               <img src={ASSETS.collaboration} alt="" className="h-full w-full object-cover object-top opacity-90" />
             </div>
             <div className="relative z-10">
