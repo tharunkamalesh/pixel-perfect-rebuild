@@ -372,14 +372,25 @@ export function VortexGrid() {
                 className="absolute left-0 right-0 pointer-events-none"
                 style={{ top: "-100px", bottom: "-150px" }}
             >
-                {/* Flawless wide, soft, blooming radial aura explicitly mapping to the 'hole fully glowness' request */}
+                {/* Layer A: Golden/orange arc at the upper curvature of the funnel — already working correctly! */}
                 <div
                     className="absolute inset-x-0"
                     style={{
                         top: "120px",
                         bottom: "-250px",
-                        // Reintroduced and heavily boosted the missing rich golden shading exactly as explicitly requested!
-                        background: "radial-gradient(ellipse 35% 35% at 50% 38%, #FFFFFF 0%, #FFFFFF 15%, rgba(255,250,240, 0.9) 35%, transparent 68%), radial-gradient(ellipse 80% 60% at 50% 38%, rgba(230, 165, 90, 0.25) 15%, transparent 75%)"
+                        // Orange shade stays exactly at 38% — matches the upper arc perfectly
+                        background: "radial-gradient(ellipse 80% 60% at 50% 38%, rgba(230, 165, 90, 0.28) 15%, transparent 70%)"
+                    }}
+                />
+
+                {/* Layer B: Soft WHITE glow inside the hole — positioned lower at 68% to hit the hole center */}
+                <div
+                    className="absolute inset-x-0"
+                    style={{
+                        top: "120px",
+                        bottom: "-250px",
+                        // Pure white glow, no amber. Sits inside the hole which is lower in the extended container.
+                        background: "radial-gradient(ellipse 30% 24% at 50% 68%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 18%, rgba(255,255,250,0.5) 45%, transparent 68%)"
                     }}
                 />
 
