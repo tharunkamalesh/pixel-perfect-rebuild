@@ -14,15 +14,15 @@ const max_R = 2800; // Geometrically clamped absolute outer radius so it fundame
 const perspective = 0.24;
 const max_depth = 230; // Increased depth so it looks like it continues downward
 const base_y = -50;
-// Exact rich golden colors meticulously reconstructed from target image!
-const colorRim = new THREE.Color("#FFFFFF"); // Luminous pure white core
-const colorRimHighlight = new THREE.Color("#E1AA75"); // Light golden to keep the hole rim distinctly visible as a circle!
-const colorOuter = new THREE.Color("#DCA770"); // Exact lighter/sandy golden for outer sweeps to match reference image!
-const animLineColor = new THREE.Color("#DEA768");
+// Lighter, delicate amber/champagne colors to ensure the funnel doesn't feel 'dark'
+const colorRim = new THREE.Color("#FFFFFF");
+const colorRimHighlight = new THREE.Color("#EED2B4"); // Softer
+const colorOuter = new THREE.Color("#E4C29F"); // Lighter/sandy golden 
+const animLineColor = new THREE.Color("#E4C29F");
 
 function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number, number, number, number] {
     let alpha = 1.0;
-    const color = new THREE.Color("#D49F6A"); // The exact, consistent sandy gold hue of the whole image!
+    const color = new THREE.Color("#E1C1A0"); // Delicate, softer golden line color
 
     if (t < 0) {
         // Graceful plunge fade — steeper so lines vanish softly as they dive deep (4.5 multiplier)
@@ -45,13 +45,16 @@ function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number,
     }
 
     // Stable visibility matching image intensity
-    alpha *= 0.44; // Gentle and completely crisp like a native SVG vector!
+    alpha *= 0.40; // Soft but distinctly visible
 
-    // Subtle edge prominence boost without destroying the color!
-    if (t >= 0 && t <= 0.15) {
-        const ringHighlight = Math.pow(1.0 - (t / 0.15), 1.5);
-        alpha = alpha + (0.35 * ringHighlight);
-        color.lerp(new THREE.Color("#E1AB72"), ringHighlight);
+    // The EXACT golden fading shading requested!
+    // We gracefully transition the line color to a warmer gold near the center hold for a natural glow.
+    if (t >= -0.12 && t <= 0.25) {
+        // Distance from the rim (t=0)
+        const dist = Math.abs(t) / 0.25;
+        const glow = Math.pow(Math.max(0, 1.0 - dist), 1.5);
+        alpha = alpha + (0.28 * glow); // Gentle boost to make the gold pop slightly
+        color.lerp(new THREE.Color("#E6A865"), glow); // Warm, beautiful golden rim transition
     }
 
     return [color.r, color.g, color.b, alpha];
@@ -228,25 +231,15 @@ function VortexGeometry() {
             nodes.push(ringNodes);
         }
 
+        // Draw all rings smoothly and organically, without artificially forcing a solid rim line!
         for (let i = 0; i < t_values.length; i++) {
-            const isRim = Math.abs(t_values[i]!) < 0.001; // Isolated exactly to the structural funnel rim!
-
             for (let j = 0; j < RADIALS_COUNT; j++) {
                 const p1 = nodes[i]![j]!;
                 const p2 = nodes[i]![(j + 1) % RADIALS_COUNT]!;
 
-                if (isRim) {
-                    rimP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-                    const col = new THREE.Color("#D9BB87"); // Champagne-gold for the lower rim
-                    rimC.push(col.r, col.g, col.b, 1.0, col.r, col.g, col.b, 1.0);
-                    // Also add a small warm blend ring so the rim feels continuously glowing
-                    rThinP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-                    rThinC.push(col.r, col.g, col.b, 0.55, col.r, col.g, col.b, 0.55);
-                } else {
-                    rThinP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-                    const [r, g, b, a] = getVertexRGBA(p1.t, false, false);
-                    rThinC.push(r, g, b, a, r, g, b, a);
-                }
+                rThinP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+                const [r, g, b, a] = getVertexRGBA(p1.t, false, false);
+                rThinC.push(r, g, b, a, r, g, b, a);
             }
         }
 
@@ -389,11 +382,11 @@ export function VortexGrid() {
                         top: "120px",
                         bottom: "-250px",
                         background: `radial-gradient(
-                            ellipse 45% 28% at 50% 38%, 
-                            rgba(255, 255, 255, 1) 15%, 
-                            rgba(255, 246, 228, 0.95) 35%, 
-                            rgba(238, 180, 110, 0.55) 65%, 
-                            rgba(238, 180, 110, 0.12) 85%, 
+                            ellipse 60% 42% at 50% 38%, 
+                            rgba(255, 255, 255, 1) 8%, 
+                            rgba(255, 246, 228, 0.95) 25%, 
+                            rgba(240, 195, 145, 0.5) 48%, 
+                            rgba(235, 185, 135, 0.15) 75%, 
                             transparent 95%
                         )`
                     }}
