@@ -25,9 +25,11 @@ function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number,
     const color = new THREE.Color("#D49F6A"); // The exact, consistent sandy gold hue of the whole image!
 
     if (t < 0) {
-        // Natural geometrical fade: exactly reaches 0 well before the loop ends so it's a seamless plunge into darkness without hard geometric chops!
-        // Changed multiplier from 2.0 to 3.0 so that at t=-0.34 (i=-10), it correctly hits exactly 0.
-        alpha = Math.max(0, 1.0 - Math.abs(t) * 3.0);
+        // Graceful plunge fade — steeper so lines vanish softly as they dive deep (4.5 multiplier)
+        const baseFade = Math.max(0, 1.0 - Math.abs(t) * 4.5);
+        // Boost first 2-3 rings (t from 0 to -0.12) to prevent the bottom curved rim from disappearing!
+        const nearRimBoost = t >= -0.12 ? Math.pow(1.0 - Math.abs(t) / 0.12, 1.5) * 0.28 : 0;
+        alpha = Math.min(1.0, baseFade + nearRimBoost);
     } else {
         // Graceful fading across the wide upper mesh
         const edge_fade = Math.max(0, 1.0 - (t / 0.95));
@@ -235,8 +237,11 @@ function VortexGeometry() {
 
                 if (isRim) {
                     rimP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-                    const col = new THREE.Color("#D8A56E"); // Exact matched distinct light golden tracing!
-                    rimC.push(col.r, col.g, col.b, 0.75, col.r, col.g, col.b, 0.75);
+                    const col = new THREE.Color("#D9BB87"); // Champagne-gold for the lower rim
+                    rimC.push(col.r, col.g, col.b, 1.0, col.r, col.g, col.b, 1.0);
+                    // Also add a small warm blend ring so the rim feels continuously glowing
+                    rThinP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+                    rThinC.push(col.r, col.g, col.b, 0.55, col.r, col.g, col.b, 0.55);
                 } else {
                     rThinP.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
                     const [r, g, b, a] = getVertexRGBA(p1.t, false, false);
@@ -372,25 +377,21 @@ export function VortexGrid() {
                 className="absolute left-0 right-0 pointer-events-none"
                 style={{ top: "-100px", bottom: "-150px" }}
             >
-                {/* Layer A: Golden/orange arc at the upper curvature of the funnel — already working correctly! */}
+                {/* 
+                    PERFECT HYBRID SHADING (Restored vibrant colors + restricted width):
+                    Used the exact vibrant golden/orange hex codes the user confirmed were "good and crt".
+                    Used tighter ellipse bounds (32% & 45%) so the glow doesn't flood the full outer component.
+                    Anchored safely at 43% so it sits beautifully in the visible bowl.
+                */}
                 <div
                     className="absolute inset-x-0"
                     style={{
                         top: "120px",
                         bottom: "-250px",
-                        // Orange shade stays exactly at 38% — matches the upper arc perfectly
-                        background: "radial-gradient(ellipse 80% 60% at 50% 38%, rgba(230, 165, 90, 0.28) 15%, transparent 70%)"
-                    }}
-                />
-
-                {/* Layer B: Soft WHITE glow inside the hole — positioned lower at 68% to hit the hole center */}
-                <div
-                    className="absolute inset-x-0"
-                    style={{
-                        top: "120px",
-                        bottom: "-250px",
-                        // Pure white glow, no amber. Sits inside the hole which is lower in the extended container.
-                        background: "radial-gradient(ellipse 30% 24% at 50% 68%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 18%, rgba(255,255,250,0.5) 45%, transparent 68%)"
+                        background: `
+                            radial-gradient(ellipse 32% 22% at 50% 45%, rgba(255, 255, 255, 1) 0%, rgba(255, 250, 235, 0.95) 25%, rgba(255, 238, 205, 0.6) 60%, transparent 80%),
+                            radial-gradient(ellipse 45% 38% at 50% 43%, rgba(255, 230, 185, 0.65) 0%, rgba(238, 175, 110, 0.48) 40%, rgba(220, 155, 85, 0.22) 75%, transparent 90%)
+                        `
                     }}
                 />
 
