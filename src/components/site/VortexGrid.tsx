@@ -379,7 +379,7 @@ export function VortexGrid() {
                         top: "120px",
                         bottom: "-250px",
                         // Reintroduced and heavily boosted the missing rich golden shading exactly as explicitly requested!
-                        background: "radial-gradient(ellipse 35% 35% at 50% 50%, #FFFFFF 0%, #FFFFFF 15%, rgba(255,250,240, 0.9) 35%, transparent 68%), radial-gradient(ellipse 80% 60% at 50% 50%, rgba(230, 165, 90, 0.25) 15%, transparent 75%)"
+                        background: "radial-gradient(ellipse 35% 35% at 50% 38%, #FFFFFF 0%, #FFFFFF 15%, rgba(255,250,240, 0.9) 35%, transparent 68%), radial-gradient(ellipse 80% 60% at 50% 38%, rgba(230, 165, 90, 0.25) 15%, transparent 75%)"
                     }}
                 />
 
