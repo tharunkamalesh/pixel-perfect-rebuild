@@ -378,20 +378,24 @@ export function VortexGrid() {
                 style={{ top: "-100px", bottom: "-150px" }}
             >
                 {/* 
-                    PERFECT HYBRID SHADING (Restored vibrant colors + restricted width):
-                    Used the exact vibrant golden/orange hex codes the user confirmed were "good and crt".
-                    Used tighter ellipse bounds (32% & 45%) so the glow doesn't flood the full outer component.
-                    Anchored safely at 43% so it sits beautifully in the visible bowl.
+                    PIXEL-PERFECT EXACT RECREATION (Extracted Colors from Reference Image):
+                    1. Replaced the highly saturated orange with the elegant creamy off-white (#FEF7ED) and pale peach (#F2D8BA).
+                    2. Widened the ellipse to match the exact size and fading ratio of the huge white glow.
+                    3. Perfectly constrained, seamless one/layer gradient without any harsh band transitions.
                 */}
                 <div
                     className="absolute inset-x-0"
                     style={{
                         top: "120px",
                         bottom: "-250px",
-                        background: `
-                            radial-gradient(ellipse 32% 22% at 50% 45%, rgba(255, 255, 255, 1) 0%, rgba(255, 250, 235, 0.95) 25%, rgba(255, 238, 205, 0.6) 60%, transparent 80%),
-                            radial-gradient(ellipse 45% 38% at 50% 43%, rgba(255, 230, 185, 0.65) 0%, rgba(238, 175, 110, 0.48) 40%, rgba(220, 155, 85, 0.22) 75%, transparent 90%)
-                        `
+                        background: `radial-gradient(
+                            ellipse 45% 28% at 50% 38%, 
+                            rgba(255, 255, 255, 1) 15%, 
+                            rgba(255, 246, 228, 0.95) 35%, 
+                            rgba(238, 180, 110, 0.55) 65%, 
+                            rgba(238, 180, 110, 0.12) 85%, 
+                            transparent 95%
+                        )`
                     }}
                 />
 
