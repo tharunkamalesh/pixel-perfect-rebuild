@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -18,43 +18,51 @@ const base_y = -50;
 const colorRim = new THREE.Color("#FFFFFF");
 const colorRimHighlight = new THREE.Color("#EED2B4"); // Softer
 const colorOuter = new THREE.Color("#E4C29F"); // Lighter/sandy golden 
-const animLineColor = new THREE.Color("#E4C29F");
+const animLineColor = new THREE.Color("#DCA46A");
 
 function getVertexRGBA(t: number, isThick: boolean, isRadial: boolean): [number, number, number, number] {
     let alpha = 1.0;
-    const color = new THREE.Color("#E1C1A0"); // Delicate, softer golden line color
+    const color = new THREE.Color();
 
     if (t < 0) {
-        // Graceful plunge fade — steeper so lines vanish softly as they dive deep (4.5 multiplier)
-        const baseFade = Math.max(0, 1.0 - Math.abs(t) * 4.5);
-        // Boost first 2-3 rings (t from 0 to -0.12) to prevent the bottom curved rim from disappearing!
-        const nearRimBoost = t >= -0.12 ? Math.pow(1.0 - Math.abs(t) / 0.12, 1.5) * 0.28 : 0;
-        alpha = Math.min(1.0, baseFade + nearRimBoost);
+        // INSIDE THE CIRCLE
+        // Lines plunge into the bright luminous center, so they should soften visually!
+        const baseFade = Math.max(0, 1.0 - Math.abs(t) * 2.2);
+        alpha = Math.min(1.0, baseFade);
+        color.set("#D6A57A"); // Soft, light golden-tan, NOT dark shadow!
+
+        if (isRadial) {
+            alpha *= 0.30; // Visibly softer inside the hole directly under the button
+        } else {
+            alpha *= 0.15; // Very faint rings inside
+        }
     } else {
-        // Graceful fading across the wide upper mesh
-        const edge_fade = Math.max(0, 1.0 - (t / 0.95));
-        alpha = Math.pow(edge_fade, 1.25);
+        // OUTSIDE THE CIRCLE (coming up)
+        // STRICT PROGRESSIVE FADE: 
+        // Center = Visible -> Mid = Softer -> Edges = Almost Invisible
+        const edge_fade = Math.max(0, 1.0 - Math.min(1.0, t));
+        alpha = Math.pow(edge_fade, 1.5); // Exponential falloff so they dissolve into nothingness smoothly
+
+        color.set("#E6B587"); // Light delicate warm golden/orange grid
+
+        if (isRadial) {
+            alpha *= 0.45; // Starts visible near center, but the exponent fade softens it across the screen
+        } else {
+            alpha *= 0.25; // Thinner rings
+        }
     }
 
     if (isThick) {
         alpha *= 1.2;
-    } else if (isRadial) {
-        alpha *= 1.0;
-    } else {
-        alpha *= 1.1;
     }
 
-    // Stable visibility matching image intensity
-    alpha *= 0.40; // Soft but distinctly visible
-
-    // The EXACT golden fading shading requested!
-    // We gracefully transition the line color to a warmer gold near the center hold for a natural glow.
-    if (t >= -0.12 && t <= 0.25) {
-        // Distance from the rim (t=0)
-        const dist = Math.abs(t) / 0.25;
+    // Blend color smoothly at the rim
+    if (t >= -0.05 && t <= 0.15) {
+        const dist = Math.abs(t) / 0.15;
         const glow = Math.pow(Math.max(0, 1.0 - dist), 1.5);
-        alpha = alpha + (0.28 * glow); // Gentle boost to make the gold pop slightly
-        color.lerp(new THREE.Color("#E6A865"), glow); // Warm, beautiful golden rim transition
+
+        alpha += (0.18 * glow);
+        color.lerp(new THREE.Color("#DA9047"), glow); // Subtle warm golden POP right at the rim
     }
 
     return [color.r, color.g, color.b, alpha];
@@ -136,18 +144,44 @@ function AnimatedRadial({ allowedIndices, delay }: { allowedIndices: number[], d
 
             const tailFade = 1.0 - (k / 14);
             let alpha = 1.0;
-            let drawColor = animLineColor;
+
+            // TRAVELING LINES
+            // The user explicitly requested the traveling lines be even darker!
+            // #9E5513 (Very dark burnt orange/brown)
+            let r = 0.620;
+            let g = 0.333;
+            let b = 0.075;
 
             if (t_prog < 0) {
-                // Plunging animated lines! Native geometrical fade mapping without awkwardly forcing it to pure white, so it visibly travels into the foggy depth!
-                alpha = Math.max(0, 1.0 - Math.abs(t_prog) * 3.0);
+                // Plunging animated lines smoothly reaching the depths
+                const depthFade = Math.max(0, 1.0 - Math.abs(t_prog) * 1.8);
+                alpha = Math.min(1.0, depthFade * 1.2); // Lock to maximum opacity inside
+
+                // #6E390A (Very dark shadow brown for the depths)
+                r = 0.431;
+                g = 0.224;
+                b = 0.039;
             } else {
-                // Slower falloff so they stay alive near edges
-                alpha = Math.exp(-1.5 * t_prog * t_prog);
+                // Do not fade them out mathematically! 
+                // Let them streak solidly entirely from the off-screen left and right boundaries!
+                // The CSS container mask handles gracefully fading them at the absolute screen edge.
+                alpha = 1.0;
+
+                // Blend color at the rim seamlessly
+                if (t_prog <= 0.15) {
+                    const dist = Math.abs(t_prog) / 0.15;
+                    const glow = Math.pow(Math.max(0, 1.0 - dist), 1.5);
+                    alpha += (0.18 * glow);
+
+                    // Lerp towards #DA9047 (Warm golden glow)
+                    r = r + (0.855 - r) * glow;
+                    g = g + (0.565 - g) * glow;
+                    b = b + (0.278 - b) * glow;
+                }
             }
 
-            // Completely removed all artificial alpha multipliers! The traveling lines now natively absorb the exact darkness and lower opacity of the space they travel through!
-            colAttr.setXYZW(k, drawColor.r, drawColor.g, drawColor.b, alpha * tailFade);
+            // Apply calculated colors directly
+            colAttr.setXYZW(k, r, g, b, alpha * tailFade);
         }
 
         posAttr.needsUpdate = true;
@@ -359,6 +393,23 @@ function VortexGeometry() {
 }
 
 export function VortexGrid() {
+    const [scale, setScale] = useState(1);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                // Shrink significantly on tiny portable screens so the full funnel is framed properly
+                setScale(window.innerWidth / 850);
+            } else {
+                setScale(1);
+            }
+        };
+
+        handleResize(); // Initial check
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <div className="relative w-full h-[200px] md:h-[240px] pointer-events-none z-0 overflow-visible text-black">
 
@@ -377,15 +428,14 @@ export function VortexGrid() {
                     3. Perfectly constrained, seamless one/layer gradient without any harsh band transitions.
                 */}
                 <div
-                    className="absolute inset-x-0"
+                    className="absolute inset-x-0 max-md:top-[220px] md:top-[120px]"
                     style={{
-                        top: "120px",
                         bottom: "-250px",
                         background: `radial-gradient(
                             ellipse 60% 42% at 50% 38%, 
-                            rgba(255, 255, 255, 1) 8%, 
-                            rgba(255, 246, 228, 0.95) 25%, 
-                            rgba(240, 195, 145, 0.5) 48%, 
+                            rgba(255, 255, 255, 0.85) 5%, 
+                            rgba(255, 246, 228, 0.80) 22%, 
+                            rgba(240, 195, 145, 0.45) 48%, 
                             rgba(235, 185, 135, 0.15) 75%, 
                             transparent 95%
                         )`
@@ -393,11 +443,12 @@ export function VortexGrid() {
                 />
 
                 <div
-                    className="absolute inset-0 w-full h-full object-cover z-10"
+                    className="absolute inset-0 w-full h-full object-cover z-10 max-md:top-[220px] md:top-[0px]"
                     style={{
-                        // Perfectly accurate smooth gradient fade directly copying the original reference curve
-                        maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 88%, transparent 100%), linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 12%, rgba(0,0,0,0.6) 25%, black 45%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.1) 88%, transparent 100%)",
-                        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 8%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 88%, transparent 100%), linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 12%, rgba(0,0,0,0.6) 25%, black 45%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.1) 88%, transparent 100%)",
+                        // Combined a vertical fade (so lines gracefully vanish before touching the title text) 
+                        // with the radial edge fade pulled in tighter (so the left and right wings smoothly soften outwards).
+                        maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
+                        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
                         WebkitMaskComposite: "source-in",
                         maskComposite: "intersect"
                     }}
@@ -408,17 +459,19 @@ export function VortexGrid() {
                         camera={{ position: [0, 0, 100], zoom: 1 }}
                         gl={{ antialias: true, alpha: true }}
                     >
-                        <VortexGeometry />
-                        <AnimatedRadial allowedIndices={[31, 32]} delay={0.0} /> {/* Bottom center */}
-                        <AnimatedRadial allowedIndices={[15, 16]} delay={0.7} /> {/* Bottom right */}
-                        <AnimatedRadial allowedIndices={[46, 47]} delay={1.4} /> {/* Left */}
-                        <AnimatedRadial allowedIndices={[60, 61, 0, 1]} delay={2.1} /> {/* Top center */}
-                        <AnimatedRadial allowedIndices={[24, 25, 26]} delay={0.4} /> {/* Bottom right-ish */}
-                        <AnimatedRadial allowedIndices={[7, 8, 9]} delay={1.1} /> {/* Top right */}
-                        <AnimatedRadial allowedIndices={[38, 39, 40]} delay={1.8} /> {/* Bottom left */}
-                        <AnimatedRadial allowedIndices={[53, 54, 55]} delay={0.9} /> {/* Top left */}
-                        <AnimatedRadial allowedIndices={[20, 21]} delay={2.5} /> {/* Bottom right fill */}
-                        <AnimatedRadial allowedIndices={[42, 43]} delay={1.6} /> {/* Bottom left fill */}
+                        <group scale={scale}>
+                            <VortexGeometry />
+                            <AnimatedRadial allowedIndices={[31, 32]} delay={0.0} /> {/* Bottom center */}
+                            <AnimatedRadial allowedIndices={[15, 16]} delay={0.7} /> {/* Bottom right */}
+                            <AnimatedRadial allowedIndices={[46, 47]} delay={1.4} /> {/* Left */}
+                            <AnimatedRadial allowedIndices={[60, 61, 0, 1]} delay={2.1} /> {/* Top center */}
+                            <AnimatedRadial allowedIndices={[24, 25, 26]} delay={0.4} /> {/* Bottom right-ish */}
+                            <AnimatedRadial allowedIndices={[7, 8, 9]} delay={1.1} /> {/* Top right */}
+                            <AnimatedRadial allowedIndices={[38, 39, 40]} delay={1.8} /> {/* Bottom left */}
+                            <AnimatedRadial allowedIndices={[53, 54, 55]} delay={0.9} /> {/* Top left */}
+                            <AnimatedRadial allowedIndices={[20, 21]} delay={2.5} /> {/* Bottom right fill */}
+                            <AnimatedRadial allowedIndices={[42, 43]} delay={1.6} /> {/* Bottom left fill */}
+                        </group>
                     </Canvas>
                 </div>
             </div>
