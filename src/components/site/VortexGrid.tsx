@@ -394,14 +394,17 @@ function VortexGeometry() {
 
 export function VortexGrid() {
     const [scale, setScale] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 768) {
-                // Shrink significantly on tiny portable screens so the full funnel is framed properly
-                setScale(window.innerWidth / 850);
+                // Ensure a nice wide, expansive elliptical opening on mobile!
+                setScale(0.70);
+                setIsMobile(true);
             } else {
                 setScale(1);
+                setIsMobile(false);
             }
         };
 
@@ -428,8 +431,9 @@ export function VortexGrid() {
                     3. Perfectly constrained, seamless one/layer gradient without any harsh band transitions.
                 */}
                 <div
-                    className="absolute inset-x-0 max-md:top-[220px] md:top-[120px]"
+                    className="absolute inset-x-0"
                     style={{
+                        top: "120px",
                         bottom: "-250px",
                         background: `radial-gradient(
                             ellipse 60% 42% at 50% 38%, 
@@ -443,12 +447,16 @@ export function VortexGrid() {
                 />
 
                 <div
-                    className="absolute inset-0 w-full h-full object-cover z-10 max-md:top-[220px] md:top-[0px]"
+                    className="absolute inset-0 w-full h-full object-cover z-10"
                     style={{
-                        // Combined a vertical fade (so lines gracefully vanish before touching the title text) 
-                        // with the radial edge fade pulled in tighter (so the left and right wings smoothly soften outwards).
-                        maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
-                        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
+                        // On mobile, the radial mask is pulled in tighter horizontally (90% width -> 85% transparent) so it seamlessly dissolves 
+                        // into the background on the left and right without touching the narrow phone frame boundaries!
+                        maskImage: isMobile
+                            ? "linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(0,0,0,0.1) 45%, black 60%, black 85%, transparent 100%), radial-gradient(ellipse 90% 70% at 50% 55%, black 30%, transparent 85%)"
+                            : "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
+                        WebkitMaskImage: isMobile
+                            ? "linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(0,0,0,0.1) 45%, black 60%, black 85%, transparent 100%), radial-gradient(ellipse 90% 70% at 50% 55%, black 30%, transparent 85%)"
+                            : "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 15%, black 38%, black 85%, transparent 100%), radial-gradient(ellipse 95% 70% at 50% 50%, black 40%, transparent 85%)",
                         WebkitMaskComposite: "source-in",
                         maskComposite: "intersect"
                     }}
@@ -459,7 +467,7 @@ export function VortexGrid() {
                         camera={{ position: [0, 0, 100], zoom: 1 }}
                         gl={{ antialias: true, alpha: true }}
                     >
-                        <group scale={scale}>
+                        <group scale={scale} position={[0, -10, 0]}>
                             <VortexGeometry />
                             <AnimatedRadial allowedIndices={[31, 32]} delay={0.0} /> {/* Bottom center */}
                             <AnimatedRadial allowedIndices={[15, 16]} delay={0.7} /> {/* Bottom right */}

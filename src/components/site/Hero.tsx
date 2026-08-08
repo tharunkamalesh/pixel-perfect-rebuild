@@ -42,7 +42,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mt-6 font-semibold text-[#0A0A0A] text-[2.75rem] sm:text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.05] tracking-tight w-full max-w-[1100px] mx-auto"
+          className="mt-5 md:mt-6 font-semibold text-[#0A0A0A] text-[2.40rem] sm:text-[3rem] md:text-[4.25rem] lg:text-[4.75rem] leading-[1.1] md:leading-[1.05] tracking-tight w-full max-w-[1100px] mx-auto px-1"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -52,7 +52,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-[960px] text-[1.0625rem] md:text-[1.25rem] leading-[1.45] text-[#525252]"
+          className="mt-3 md:mt-5 max-w-[960px] text-[1rem] md:text-[1.25rem] leading-[1.45] text-[#525252]"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -63,7 +63,7 @@ export function Hero() {
 
         <motion.a
           href="#pricing"
-          className="relative z-10 inline-flex mt-[40px] md:mt-[48px] items-center justify-center bg-[#171717] text-white font-medium text-[15px] px-8 py-[14px] rounded-lg border border-black/10 hover:bg-[#262626] transition-colors shadow-sm"
+          className="relative z-10 inline-flex mt-[28px] md:mt-[48px] items-center justify-center bg-[#171717] text-white font-medium text-[15px] px-8 py-[14px] rounded-lg border border-black/10 hover:bg-[#262626] transition-colors shadow-sm"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -74,9 +74,11 @@ export function Hero() {
 
       </div>
 
-      {/* Increased the -translate-y to push the funnel even further up without affecting the dashboard underneath */}
-      <div className="w-full flex justify-center pointer-events-none mt-[-180px] sm:mt-[-120px] lg:mt-[-90px] -translate-y-[50px] md:-translate-y-[90px] relative z-0">
-        {/* Redundant overarching Hero glows REMOVED! Only the specific VortexGrid funnel will cast color! */}
+      {/* 
+        Slightly lifted the entire grid visually upwards on mobile using translate 
+        so the glowing hole slips safely out from behind the dashboard mockup! 
+      */}
+      <div className="w-full flex justify-center pointer-events-none mt-[-100px] sm:mt-[-120px] lg:mt-[-90px] max-md:-translate-y-[60px] md:-translate-y-[90px] relative z-0">
         <VortexGrid />
       </div>
 
