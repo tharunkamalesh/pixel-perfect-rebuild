@@ -34,7 +34,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         {/* We will let Next.js generate the icon via app/icon.tsx */}
       </head>
-      <body className="overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden">
+        <div className="w-full flex flex-col overflow-x-hidden relative min-h-screen">
+          {children}
+        </div>
+      </body>
 
     </html>
   );
